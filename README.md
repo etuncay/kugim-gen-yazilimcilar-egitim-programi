@@ -1,0 +1,1 @@
+# kugim-genc-yazilimcilar-egitim-programi
