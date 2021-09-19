@@ -1,5 +1,5 @@
 # KÜÇÜKÇEKMECE GİRİŞİMCİLİK ve İNOVASYON MERKEZİ
-Web Adresli : https://www.kugim.com.tr/faaliyetler-Genc-Yazilimcilar-Egitim-Programi
+Web Adresi : https://www.kugim.com.tr/faaliyetler-Genc-Yazilimcilar-Egitim-Programi
 
 # GENÇ YAZILIMCILAR EĞİTİM PROGRAMI
 Her biri 48 saat 3 Kur toplam 144 saatlik Yazılım Eğitimi verilecek olup, içeriği aşağıda detaylandırılmıştır
