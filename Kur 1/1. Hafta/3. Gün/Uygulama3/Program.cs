@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Uygulama3
 {
@@ -77,12 +78,10 @@ namespace Uygulama3
             bool[] boolDizi = new bool[10];
 
             boolDizi[0] = true;
-            boolDizi[11] = true;
 
 
 
-
-
+            
 
 
 
