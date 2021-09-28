@@ -30,7 +30,7 @@ namespace HesapMakinesi
                                 Console.Clear();
                                 Console.WriteLine("Lütfen bir sayı giriniz");
                                 var sayiString = Console.ReadLine();
-                                
+
                                 if (int.TryParse(sayiString , out int sayiInt))
                                 {
                                     toplam = toplam + sayiInt;
@@ -64,6 +64,9 @@ namespace HesapMakinesi
                             Console.Clear();
                             break;
                         case 2:
+
+
+
                             Console.Write("1. sayıyı giriniz = ");
                             var sayi1String2 = Console.ReadLine();
                             Console.Write("2. sayıyı giriniz = ");
@@ -75,22 +78,47 @@ namespace HesapMakinesi
                             Console.WriteLine("2 sayının çıkmarması =" + cikan);
                             islem = "Yapılan işlem çıkmarma sayi 1=" + sayi1Int2 + ", sayi 2 = " + sayi2Int2 + " cıkan = " + cikan;
                             islemdefteri.Add(islem);
+
                             Bekleme();
                             Console.Clear();
                             break;
                         case 3:
-                            Console.Write("1. sayıyı giriniz = ");
-                            var sayi1String3 = Console.ReadLine();
-                            Console.Write("2. sayıyı giriniz = ");
-                            var sayi2String3 = Console.ReadLine();
+                            //Console.Write("1. sayıyı giriniz = ");
+                            //var sayi1String3 = Console.ReadLine();
+                            //Console.Write("2. sayıyı giriniz = ");
+                            //var sayi2String3 = Console.ReadLine();
 
-                            var sayi1Int3 = int.Parse(sayi1String3);
-                            var sayi2Int3 = int.Parse(sayi2String3);
-                            var carpma = sayi1Int3 * sayi2Int3;
-                            Console.WriteLine("2 sayının çarpımı = "+ carpma);
-                            islem = "Yapılan işlem çarpma sayi 1=" + sayi1Int3 + ", sayi 2 = " + sayi2Int3 + " çarpım = " + carpma;
+                            //var sayi1Int3 = int.Parse(sayi1String3);
+                            //var sayi2Int3 = int.Parse(sayi2String3);
+                            //var carpma = sayi1Int3 * sayi2Int3;
+                            //Console.WriteLine("2 sayının çarpımı = "+ carpma);
+                            //islem = "Yapılan işlem çarpma sayi 1=" + sayi1Int3 + ", sayi 2 = " + sayi2Int3 + " çarpım = " + carpma;
+
+                            var carpmaIslem = true;
+                            var carpim = 1;
+                            var islemSira = 2;
+                            var islemSayi1 = "";
+                            while (carpmaIslem)
+                            {
+                                Console.Write("Lütfen sayı giriniz");
+                                var sayiString = Console.ReadLine();
+                                try
+                                {
+                                    var sayiInt = int.Parse(sayiString);
+                                    carpim = carpim * sayiInt;
+                                    islemSayi1 = islemSayi1 + " sayi " + islemSira + " =" + sayiInt + " ,";
+                                }
+                                catch (Exception e)
+                                {
+                                    carpmaIslem = false;
+                                }
+                            }
+                            islem = "Yapılan işlem çarpma " + islemSayi1 + " toplamı = " + carpim;
+
+                            Console.WriteLine("Çarpma = " + carpim);
 
                             islemdefteri.Add(islem);
+
                             Bekleme();
                             Console.Clear();
                             break;
