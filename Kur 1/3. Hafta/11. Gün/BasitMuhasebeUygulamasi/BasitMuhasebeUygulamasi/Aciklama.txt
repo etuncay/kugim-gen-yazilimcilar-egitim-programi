@@ -1,0 +1,60 @@
+﻿Basit Muhasebe Uygulaması
+
+Müşteriler
+1.	Alanlar
+a.	Id
+b.	Ad
+c.	Soyad
+d.	TC
+e.	Adres
+
+2.	Methodlar
+a.	Listele
+b.	Getir
+c.	Ekle
+d.	Güncelle
+e.	Sil
+
+Ürünler
+1.	Alanlar
+a.	Id
+b.	Adı
+c.	BirimFiyati
+d.	Adet
+2.	Methodlar
+
+a.	Listele
+b.	Getir
+c.	Ekle
+d.	Güncelle
+e.	Sil
+f.	Adet Ekle
+
+
+Satış
+1.	Alanlar
+
+a.	Id
+b.	MusteriId
+c.	UrunId
+d.	Adet
+e.	Tarih
+
+2.	Methodlar
+
+a.	SatislariListele
+b.	SatislariListele -> Musteri
+c.	SatisYap
+d.	SatisIptal
+
+Ödeme
+1.	Alanlar
+a.	Id
+b.	SatisId
+c.	OdemeTutari
+d.	Tarih
+
+2.	Methodlar
+a.	OdemeAl
+b.	OdemeListele - > Satis
+c.	OdemeListele
