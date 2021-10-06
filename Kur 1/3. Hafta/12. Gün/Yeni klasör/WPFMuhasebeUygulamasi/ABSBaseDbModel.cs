@@ -4,8 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
-namespace WPFMuhasebeUygulamasi.musteri
+namespace WPFMuhasebeUygulamasi
 {
     public abstract class ABSBaseDbModel
     {
@@ -16,5 +17,7 @@ namespace WPFMuhasebeUygulamasi.musteri
                 File.Create(dosyaYolu);
             }
         }
+
+        public abstract void DataGridYenile(DataGrid dataGrid);
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MusteriListe" Height="450" Width="800">
     <Grid>
-        <Button Content="Yeni Müşteri Ekle" HorizontalAlignment="Left" Margin="640,9,0,0" VerticalAlignment="Top" Width="145" Click="Button_Click"/>
+        <Button Content="Ekle" HorizontalAlignment="Left" Margin="400,24,0,0" VerticalAlignment="Top" Width="67" Click="Button_Click"/>
         <Button Content="Ana Sayfa Dön" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click_2"/>
         <DataGrid x:Name="MusteriDataGrid" Margin="0,60,0,0">
             <DataGrid.Columns>
@@ -19,6 +19,8 @@
                 <DataGridTextColumn Header="Cep Telefonu" Binding="{Binding CepTelefonu}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Güncelle" HorizontalAlignment="Left" Margin="510,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,-0.339" Width="97" Click="Button_Click_1"/>
+        <Button Content="Sil" HorizontalAlignment="Left" Margin="655,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.293,0.583" Width="86"/>
 
     </Grid>
 </Window>

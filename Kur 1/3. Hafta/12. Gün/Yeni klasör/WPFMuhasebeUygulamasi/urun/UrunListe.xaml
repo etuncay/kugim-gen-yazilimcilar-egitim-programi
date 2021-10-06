@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="UrunListe" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="401*"/>
+            <ColumnDefinition Width="399*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Geri Dön" HorizontalAlignment="Left" Margin="26,10,0,0" VerticalAlignment="Top"/>
+        <Button Content="Ekle" HorizontalAlignment="Left" Margin="151,20,0,0" VerticalAlignment="Top" Width="52" Grid.Column="1" Click="Button_Click"/>
+        <Button Content="Güncelle" HorizontalAlignment="Left" Margin="238,20,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button Content="Sil" HorizontalAlignment="Left" Margin="321,20,0,0" VerticalAlignment="Top" Width="53" Grid.Column="1"/>
+        <DataGrid x:Name="UrunDataGrid" Grid.ColumnSpan="2" Margin="0,72,0,0" SelectionChanged="UrunDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adı" Binding="{Binding Adi}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birim Fiyatı" Binding="{Binding BirimFiyati}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Depo Adet" Binding="{Binding DepoAdet}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>

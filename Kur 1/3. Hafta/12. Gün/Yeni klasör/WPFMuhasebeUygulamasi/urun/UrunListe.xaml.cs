@@ -22,6 +22,24 @@ namespace WPFMuhasebeUygulamasi.urun
         public UrunListe()
         {
             InitializeComponent();
+
+            var urunYonetim = new UrunYonetim();
+
+            urunYonetim.DataGridYenile(UrunDataGrid);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var urunForm = new UrunForm();
+
+            urunForm.Show();
+
+            this.Close();
+        }
+
+        private void UrunDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

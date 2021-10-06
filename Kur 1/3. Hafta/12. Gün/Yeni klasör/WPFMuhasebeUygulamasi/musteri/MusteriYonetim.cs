@@ -15,7 +15,12 @@ namespace WPFMuhasebeUygulamasi.musteri
         private string dosyaYolu = "D:\\Git\\myshelf\\kugim-gen-yazilimcilar-egitim-programi\\Kur 1\\3. Hafta\\12. Gün\\Yeni klasör\\WPFMuhasebeUygulamasi\\DB\\musteri.txt";
         private int id = 1;
 
-        public void DataGridYenile(DataGrid dataGrid)
+        public MusteriYonetim()
+        {
+            DosyaKontrolEt(dosyaYolu);
+        }
+
+        public override void DataGridYenile(DataGrid dataGrid)
         {
             var items = Liste();
 
@@ -35,7 +40,6 @@ namespace WPFMuhasebeUygulamasi.musteri
 
         public bool Ekle(MusteriDbModel model)
         {
-            DosyaKontrolEt(dosyaYolu);
             
             var dbString = File.ReadAllText(dosyaYolu);
 
