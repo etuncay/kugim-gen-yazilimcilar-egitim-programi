@@ -1,0 +1,24 @@
+﻿<Window x:Class="WPFMuhasebeUygulamasi.musteri.MusteriListe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMuhasebeUygulamasi.musteri"
+        mc:Ignorable="d"
+        Title="MusteriListe" Height="450" Width="800">
+    <Grid>
+        <Button Content="Yeni Müşteri Ekle" HorizontalAlignment="Left" Margin="640,9,0,0" VerticalAlignment="Top" Width="145" Click="Button_Click"/>
+        <Button Content="Ana Sayfa Dön" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" Width="110" Click="Button_Click_2"/>
+        <DataGrid x:Name="MusteriDataGrid" Margin="0,60,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="TCNo" Binding="{Binding TCNO}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adı" Binding="{Binding Ad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Soyadı" Binding="{Binding Soyad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adres" Binding="{Binding Adres}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cep Telefonu" Binding="{Binding CepTelefonu}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,1 @@
+[{"Id":1,"Ad":"Kerim","Soyad":"Salim","TCNO":"1111","Adres":"İstanbu","CepTelefonu":"05555 "},{"Id":2,"Ad":"Ahmet","Soyad":"Salim","TCNO":"222222","Adres":"Sakarya","CepTelefonu":"0531222222"},{"Id":3,"Ad":"Ayşe","Soyad":"Çiçek","TCNO":"3333333","Adres":"İstanbul","CepTelefonu":"05555555"}]
