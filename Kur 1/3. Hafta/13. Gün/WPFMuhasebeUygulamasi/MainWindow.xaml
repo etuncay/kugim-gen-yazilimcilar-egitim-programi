@@ -1,0 +1,22 @@
+﻿<Window x:Class="WPFMuhasebeUygulamasi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMuhasebeUygulamasi"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="145*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Müşteriler" Grid.Column="2" HorizontalAlignment="Left" Margin="225,69,0,0" VerticalAlignment="Top" Width="200" Background="#FFEAE6E6" Click="Button_Click_1"/>
+        <Button Content="Ürünler" Grid.Column="2" HorizontalAlignment="Left" Margin="225,104,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_2"/>
+        <Button Content="Satış" Grid.Column="2" HorizontalAlignment="Left" Margin="225,139,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click"/>
+        <Button Content="Ödeme" Grid.Column="2" HorizontalAlignment="Left" Margin="225,174,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_3"/>
+        <Button Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="225,204,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_4"/>
+
+    </Grid>
+</Window>

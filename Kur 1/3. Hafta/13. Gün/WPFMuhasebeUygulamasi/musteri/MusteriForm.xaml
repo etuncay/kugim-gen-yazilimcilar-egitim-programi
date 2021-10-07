@@ -1,0 +1,26 @@
+﻿<Window x:Class="WPFMuhasebeUygulamasi.musteri.MusteriForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMuhasebeUygulamasi.musteri"
+        mc:Ignorable="d"
+        Title="MusteriForm" Height="450" Width="800">
+    <Grid>
+        <Label Content="Ad" HorizontalAlignment="Left" Margin="40,34,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="id" HorizontalAlignment="Left" Margin="36,6,0,0" VerticalAlignment="Top" Width="105"/>
+        <Label Content="Soyad" HorizontalAlignment="Left" Margin="40,63,0,0" VerticalAlignment="Top"/>
+        <Label Content="Tc No" HorizontalAlignment="Left" Margin="40,98,0,0" VerticalAlignment="Top"/>
+        <Label Content="Adres" HorizontalAlignment="Left" Margin="40,144,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cep Telefonu" HorizontalAlignment="Left" Margin="36,189,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Ad" HorizontalAlignment="Left" Margin="200,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
+        <TextBox x:Name="Soyad" HorizontalAlignment="Left" Margin="200,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TCNO" HorizontalAlignment="Left" Margin="200,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Adres" HorizontalAlignment="Left" Margin="200,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="CepTelefonu" HorizontalAlignment="Left" Margin="200,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="EkleBtn" Content="Ekle" HorizontalAlignment="Left" Margin="270,244,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_1"/>
+        <Button Content="Listeye Dön" HorizontalAlignment="Left" Margin="40,244,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <TextBox x:Name="Id" HorizontalAlignment="Left" Margin="200,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

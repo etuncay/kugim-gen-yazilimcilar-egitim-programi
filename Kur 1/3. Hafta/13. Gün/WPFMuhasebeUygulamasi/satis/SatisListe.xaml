@@ -1,0 +1,42 @@
+﻿<Window x:Class="WPFMuhasebeUygulamasi.satis.SatisListe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMuhasebeUygulamasi.satis"
+        mc:Ignorable="d"
+        Title="SatisListe" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="UrunDataGrid" Margin="0,65,410,184">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adi" Binding="{Binding Adi}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birim Fiyatı" Binding="{Binding BirimFiyati}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Depo Adedi" Binding="{Binding DepoAdet}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="MusteriDataGrid" Margin="395,65,0,184">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adı" Binding="{Binding Ad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Soyadı" Binding="{Binding Soyad}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Tc No" Binding="{Binding TCNO}"></DataGridTextColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Satış Yap" HorizontalAlignment="Left" Margin="709,29,0,0" VerticalAlignment="Top" Width="81" Click="Button_Click"/>
+        <DataGrid x:Name="SatisDataGrid" Margin="0,255,0,0" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Müşteri Adı Soyadı" Binding="{Binding MusteriAdiSoyadi}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ürün Adı" Binding="{Binding UrunAdi}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birim Fiyatı" Binding="{Binding BirimFiyati}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adet" Binding="{Binding Adet}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Toplam Fiyat" Binding="{Binding ToplamFiyat}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Slider x:Name="AdetSecimi" HorizontalAlignment="Left" Margin="510,29,0,0" VerticalAlignment="Top" Width="120" ValueChanged="AdetSecimi_ValueChanged"/>
+        <Label x:Name="AdetSecimiLabel" Content="Label" HorizontalAlignment="Left" Margin="651,26,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
