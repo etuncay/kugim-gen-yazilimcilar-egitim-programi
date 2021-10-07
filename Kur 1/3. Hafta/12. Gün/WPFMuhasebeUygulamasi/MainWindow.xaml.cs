@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFMuhasebeUygulamasi.musteri;
+using WPFMuhasebeUygulamasi.odeme;
+using WPFMuhasebeUygulamasi.satis;
+using WPFMuhasebeUygulamasi.urun;
 
 namespace WPFMuhasebeUygulamasi
 {
@@ -23,6 +27,45 @@ namespace WPFMuhasebeUygulamasi
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var satislarPencere = new SatisListe();
+
+            satislarPencere.Show();
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var musteriPencere = new MusteriListe();
+
+            musteriPencere.Show();
+            this.Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var urunlerPencere = new UrunListe();
+
+            urunlerPencere.Show();
+            this.Close();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var odemelerPencere = new OdemeListe();
+            odemelerPencere.Show();
+
+            this.Close();
+
+            
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

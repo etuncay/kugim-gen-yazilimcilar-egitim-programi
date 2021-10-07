@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFMuhasebeUygulamasi.musteri.Models;
 
@@ -23,6 +24,11 @@ namespace WPFMuhasebeUygulamasi.musteri
         public MusteriForm()
         {
             InitializeComponent();
+        }
+
+        private void NavigationService_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            string str = (string)e.ExtraData;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

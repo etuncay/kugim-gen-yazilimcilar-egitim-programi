@@ -12,14 +12,13 @@ namespace WPFMuhasebeUygulamasi.urun
 {
     public class UrunYonetim : ABSBaseDbModel, IUrunYonetim
     {
-        private string dosyaYolu = "D:\\Git\\myshelf\\kugim-gen-yazilimcilar-egitim-programi\\Kur 1\\3. Hafta\\12. Gün\\Yeni klasör\\WPFMuhasebeUygulamasi\\DB\\urunler.txt";
+        private string dosyaYolu = System.IO.Directory.GetCurrentDirectory() + "\\urunler.txt";
+
         private int id = 1;
 
         public UrunYonetim()
         {
-            DosyaKontrolEt(dosyaYolu);
-
-            
+            DosyaKontrolEt(dosyaYolu);            
         }
 
         public override void DataGridYenile(DataGrid dataGrid)

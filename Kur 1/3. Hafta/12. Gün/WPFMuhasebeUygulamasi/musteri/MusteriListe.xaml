@@ -20,7 +20,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Güncelle" HorizontalAlignment="Left" Margin="510,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,-0.339" Width="97" Click="Button_Click_1"/>
-        <Button Content="Sil" HorizontalAlignment="Left" Margin="655,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.293,0.583" Width="86"/>
+        <Button Content="Sil" HorizontalAlignment="Left" Margin="655,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.293,0.583" Width="86" Click="Button_Click_3"/>
 
     </Grid>
 </Window>

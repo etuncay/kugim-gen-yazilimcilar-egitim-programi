@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFMuhasebeUygulamasi.musteri.Models;
 
@@ -43,7 +44,7 @@ namespace WPFMuhasebeUygulamasi.musteri
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            var musteriForm = new MainWindow();
+            var musteriForm = new MusteriForm();
 
             musteriForm.Show();
             this.Close();
@@ -51,7 +52,15 @@ namespace WPFMuhasebeUygulamasi.musteri
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-         
+            MusteriForm musteriForm = new MusteriForm();
+            
+            musteriForm.Show();
+            this.Close();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

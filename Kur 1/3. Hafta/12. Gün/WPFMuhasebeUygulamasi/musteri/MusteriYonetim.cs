@@ -12,7 +12,7 @@ namespace WPFMuhasebeUygulamasi.musteri
 {
     public class MusteriYonetim : ABSBaseDbModel, IMusteriYonetim
     {
-        private string dosyaYolu = "D:\\Git\\myshelf\\kugim-gen-yazilimcilar-egitim-programi\\Kur 1\\3. Hafta\\12. Gün\\Yeni klasör\\WPFMuhasebeUygulamasi\\DB\\musteri.txt";
+        private string dosyaYolu = System.IO.Directory.GetCurrentDirectory()+ "\\musteri.txt";
         private int id = 1;
 
         public MusteriYonetim()
