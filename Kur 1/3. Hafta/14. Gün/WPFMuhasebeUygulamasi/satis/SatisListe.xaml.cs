@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPFMuhasebeUygulamasi.musteri;
 using WPFMuhasebeUygulamasi.musteri.Models;
+using WPFMuhasebeUygulamasi.satis.Models;
 using WPFMuhasebeUygulamasi.urun;
 using WPFMuhasebeUygulamasi.urun.Models;
 
@@ -44,19 +45,49 @@ namespace WPFMuhasebeUygulamasi.satis
             if(seciliUrun!=null && seciliMusteri != null)
             {
                 var adet = (int)Math.Floor(AdetSecimi.Value);
-                satisYonetim.SatisYap(new Models.SatisDbModel { 
-                    Adet = adet,
-                    MusteriId = seciliMusteri.Id,
-                    UrunId = seciliUrun.Id
-                });
+                if (adet > 0)
+                {
+                    satisYonetim.SatisYap(new Models.SatisDbModel
+                    {
+                        Adet = adet,
+                        MusteriId = seciliMusteri.Id,
+                        UrunId = seciliUrun.Id
+                    });
 
-                satisYonetim.DataGridYenile(SatisDataGrid);
+                    satisYonetim.DataGridYenile(SatisDataGrid);
+                }
+                else
+                {
+                    MessageBox.Show("Lütfen adet giririniz");
+                }
+               
             }
         }
 
         private void AdetSecimi_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             AdetSecimiLabel.Content = Math.Floor(AdetSecimi.Value).ToString() ;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+
+            mainWindow.Show();
+            this.Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var seciliSatis = (SatisDataGridModel)SatisDataGrid.SelectedItem;
+
+            var result = MessageBox.Show("Silmek istediğinize eminmisiniz", "Silme İşlemi",MessageBoxButton.YesNo);
+        
+            if(result == MessageBoxResult.Yes)
+            {
+                satisYonetim.Sil(seciliSatis.Id);
+                satisYonetim.DataGridYenile(SatisDataGrid);
+            }
         }
     }
 }

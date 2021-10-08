@@ -5,8 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using WPFMuhasebeUygulamasi.musteri.Models;
+using WPFMuhasebeUygulamasi.satis;
 
 namespace WPFMuhasebeUygulamasi.musteri
 {
@@ -23,6 +25,8 @@ namespace WPFMuhasebeUygulamasi.musteri
         public override void DataGridYenile(DataGrid dataGrid)
         {
             var items = Liste();
+
+            dataGrid.Items.Clear();
 
             foreach (var item in items)
             {
@@ -44,7 +48,7 @@ namespace WPFMuhasebeUygulamasi.musteri
             var dbString = File.ReadAllText(dosyaYolu);
 
             var dbModel = JsonConvert.DeserializeObject<List<MusteriDbModel>>(dbString);
-            if (dbModel == null)
+            if (dbModel == null || dbModel.Count()==0)
             {
                 dbModel = new List<MusteriDbModel>();
                 model.Id = id;
@@ -64,7 +68,17 @@ namespace WPFMuhasebeUygulamasi.musteri
 
         public MusteriDbModel Getir(int id)
         {
-            throw new NotImplementedException();
+            var liste = Liste();
+
+            var result = new MusteriDbModel();
+
+            var musteri = liste.FirstOrDefault(q => q.Id == id);
+            if (musteri != null)
+            {
+                result = musteri;
+            }
+            return result;
+
         }
 
         public bool Guncelle(MusteriDbModel model)
@@ -106,7 +120,34 @@ namespace WPFMuhasebeUygulamasi.musteri
 
         public bool Sil(int id)
         {
-            throw new NotImplementedException();
+            var satisYonetim = new SatisYonetim();
+
+            var liste = satisYonetim.Liste();
+
+            var satis = liste.Where(q => q.MusteriId == id).FirstOrDefault();
+            var musteri = Getir(id);
+
+            if (satis == null)
+            {
+                var dbString = File.ReadAllText(dosyaYolu);
+                var dbModel = JsonConvert.DeserializeObject<List<MusteriDbModel>>(dbString);
+                var musteri2 = dbModel.FirstOrDefault(q=>q.Id == id);
+                dbModel.Remove(musteri2);
+
+
+
+                 dbString = JsonConvert.SerializeObject(dbModel);
+
+                File.WriteAllText(dosyaYolu, dbString);
+
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(musteri.Ad + " "+ musteri.Soyad + " ad soyad lı müsteri silinemez. Satış İşlemi yapılmış");
+            }
+
+            return false;
         }
     }
 }

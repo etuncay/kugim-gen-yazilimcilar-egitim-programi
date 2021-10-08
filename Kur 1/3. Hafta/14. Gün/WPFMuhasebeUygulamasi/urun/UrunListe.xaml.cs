@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFMuhasebeUygulamasi.satis;
 using WPFMuhasebeUygulamasi.urun.Models;
 
 namespace WPFMuhasebeUygulamasi.urun
@@ -68,16 +69,28 @@ namespace WPFMuhasebeUygulamasi.urun
 
             if (seciliUrun != null)
             {
-                MessageBoxResult result = MessageBox.Show(seciliUrun.Adi + " Ürününü Silmek istediğinize eminmisiniz ?",
-                                "Silme İşlemi", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                var satisYonetim = new SatisYonetim();
+
+                var satis = satisYonetim.Getir(seciliUrun.Id);
+                if (satis == null)
                 {
-                    var urunYonetim = new UrunYonetim();
+                    MessageBoxResult result = MessageBox.Show(seciliUrun.Adi + " Ürününü Silmek istediğinize eminmisiniz ?",
+                                "Silme İşlemi", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        var urunYonetim = new UrunYonetim();
 
-                    urunYonetim.Sil(seciliUrun.Id);
-                    urunYonetim.DataGridYenile(UrunDataGrid);
+                        urunYonetim.Sil(seciliUrun.Id);
+                        urunYonetim.DataGridYenile(UrunDataGrid);
 
+                    }
                 }
+                else
+                {
+                    MessageBox.Show(seciliUrun.Adi + " ürünün satış işlemi öncede yapılmıştır. Silinemez");
+                }
+
+                
             }
             else
             {

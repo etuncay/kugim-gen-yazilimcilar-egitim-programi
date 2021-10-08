@@ -16,7 +16,7 @@
         <Button Content="Ürünler" Grid.Column="2" HorizontalAlignment="Left" Margin="225,104,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_2"/>
         <Button Content="Satış" Grid.Column="2" HorizontalAlignment="Left" Margin="225,139,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click"/>
         <Button Content="Ödeme" Grid.Column="2" HorizontalAlignment="Left" Margin="225,174,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_3"/>
-        <Button Content="Button" Grid.Column="2" HorizontalAlignment="Left" Margin="225,204,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_4"/>
+        <Button Content="Kapat" Grid.Column="2" HorizontalAlignment="Left" Margin="225,204,0,0" VerticalAlignment="Top" Width="200" Click="Button_Click_4"/>
 
     </Grid>
 </Window>

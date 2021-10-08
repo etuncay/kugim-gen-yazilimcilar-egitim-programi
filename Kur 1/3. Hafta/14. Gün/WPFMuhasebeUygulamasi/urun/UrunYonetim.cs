@@ -65,7 +65,7 @@ namespace WPFMuhasebeUygulamasi.urun
 
         public UrunDbModel Getir(int id)
         {
-            throw new NotImplementedException();
+            return Liste().FirstOrDefault(q=>q.Id == id); 
         }
 
         public bool Guncelle(UrunDbModel model)

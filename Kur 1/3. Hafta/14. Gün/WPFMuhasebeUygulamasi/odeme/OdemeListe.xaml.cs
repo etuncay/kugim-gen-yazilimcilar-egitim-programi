@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPFMuhasebeUygulamasi.odeme.Models;
 
 namespace WPFMuhasebeUygulamasi.odeme
 {
@@ -19,9 +20,41 @@ namespace WPFMuhasebeUygulamasi.odeme
     /// </summary>
     public partial class OdemeListe : Window
     {
+            private OdemeYonetim odemeYonetim = new OdemeYonetim();
+
+
         public OdemeListe()
         {
             InitializeComponent();
+            odemeYonetim.DataGridYenile(OdemeDataGrid);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var seciliOdeme = (OdemeDataGridModel)OdemeDataGrid.SelectedItem;
+
+            if (seciliOdeme != null)
+            {
+                odemeYonetim.OdemeYap(new OdemeDbModel
+                {
+                    SatisId = seciliOdeme.SatisId,
+                    ToplamFiyat = seciliOdeme.ToplamFiyat
+                });
+                odemeYonetim.DataGridYenile(OdemeDataGrid);
+            }
+            else
+            {
+                MessageBox.Show("Lütfen Seçim Yapınız");
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var main = new MainWindow();
+
+            main.Show();
+
+            this.Close();
         }
     }
 }

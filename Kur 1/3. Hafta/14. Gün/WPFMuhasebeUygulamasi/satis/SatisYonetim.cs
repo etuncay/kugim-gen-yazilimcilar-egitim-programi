@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using WPFMuhasebeUygulamasi.musteri;
 using WPFMuhasebeUygulamasi.satis.Models;
@@ -46,6 +47,19 @@ namespace WPFMuhasebeUygulamasi.satis
 
         }
 
+        public SatisDbModel Getir(int id)
+        {
+            var result = new SatisDbModel();
+            var satis = Liste().FirstOrDefault(q=>q.Id==id);
+
+            if (satis != null)
+            {
+                result = satis;
+            }
+
+            return result;
+        }
+
         public List<SatisDbModel> Liste()
         {
             var dbString = File.ReadAllText(dosyaYolu);
@@ -67,7 +81,7 @@ namespace WPFMuhasebeUygulamasi.satis
             }
             else
             {
-                model.Id = liste.Max(q => q.Id);
+                model.Id = liste.Max(q => q.Id)+1;
             }
             liste.Add(model);
             var dbString = JsonConvert.SerializeObject(liste);
@@ -78,7 +92,26 @@ namespace WPFMuhasebeUygulamasi.satis
 
         public bool Sil(int id)
         {
-            throw new NotImplementedException();
+            var satislar = Liste();
+
+
+            var satis = satislar.FirstOrDefault(q=>q.Id == id);
+
+            if (satis != null)
+            {
+                satislar.Remove(satis);
+
+                var dbString = JsonConvert.SerializeObject(satislar);
+
+                File.WriteAllText(dosyaYolu, dbString);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Satış Bulunamadı");
+            }
+
+            return false;
         }
     }
 }

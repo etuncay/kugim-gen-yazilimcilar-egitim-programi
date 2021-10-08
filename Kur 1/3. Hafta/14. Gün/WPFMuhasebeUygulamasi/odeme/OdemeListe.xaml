@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="OdemeListe" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="OdemeDataGrid" Margin="0,117,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Müsteri Adı Soyadı" Binding="{Binding MusteriAdiSoyadi}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ürün Ad" Binding="{Binding UrunAdi}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Toplam Fiyat" Binding="{Binding ToplamFiyat}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Ödeme Yapıldımı" Binding="{Binding OdemeDurum}"></DataGridTextColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Geri Dön" HorizontalAlignment="Left" Margin="37,48,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Content="Ödeme Yap" HorizontalAlignment="Left" Margin="668,62,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+
     </Grid>
 </Window>

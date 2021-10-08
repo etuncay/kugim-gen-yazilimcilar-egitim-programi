@@ -59,11 +59,14 @@ namespace WPFMuhasebeUygulamasi.musteri
             {
                 formData.Id = int.Parse(Id.Text);
                 musteriYonetim.Guncelle(formData);
+                MessageBox.Show("Güncelleme işlemi yapılmıştır");
             }
             else
             {  
 
                 musteriYonetim.Ekle(formData);
+
+                MessageBox.Show("Ekleme işlemi yapılmıştır");
             }
 
             

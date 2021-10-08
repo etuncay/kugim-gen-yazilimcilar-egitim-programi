@@ -24,7 +24,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Satış Yap" HorizontalAlignment="Left" Margin="709,29,0,0" VerticalAlignment="Top" Width="81" Click="Button_Click"/>
+        <Button Content="Satış Yap" HorizontalAlignment="Left" Margin="617,29,0,0" VerticalAlignment="Top" Width="79" Click="Button_Click" Height="18"/>
         <DataGrid x:Name="SatisDataGrid" Margin="0,255,0,0" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"></DataGridTextColumn>
@@ -35,8 +35,10 @@
                 <DataGridTextColumn Header="Toplam Fiyat" Binding="{Binding ToplamFiyat}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Slider x:Name="AdetSecimi" HorizontalAlignment="Left" Margin="510,29,0,0" VerticalAlignment="Top" Width="120" ValueChanged="AdetSecimi_ValueChanged"/>
-        <Label x:Name="AdetSecimiLabel" Content="Label" HorizontalAlignment="Left" Margin="651,26,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="AdetSecimi" HorizontalAlignment="Left" Margin="418,29,0,0" VerticalAlignment="Top" Width="120" ValueChanged="AdetSecimi_ValueChanged"/>
+        <Label x:Name="AdetSecimiLabel" Content="" HorizontalAlignment="Left" Margin="559,26,0,0" VerticalAlignment="Top" Width="39"/>
+        <Button Content="Geri Dön" HorizontalAlignment="Left" Margin="32,26,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Content="Satış Sil" HorizontalAlignment="Left" Margin="724,28,0,0" VerticalAlignment="Top" Width="66" Click="Button_Click_2"/>
 
     </Grid>
 </Window>

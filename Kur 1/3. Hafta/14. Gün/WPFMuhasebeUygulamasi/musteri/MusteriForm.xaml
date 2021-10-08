@@ -8,7 +8,6 @@
         Title="MusteriForm" Height="450" Width="800">
     <Grid>
         <Label Content="Ad" HorizontalAlignment="Left" Margin="40,34,0,0" VerticalAlignment="Top" Width="105"/>
-        <Label Content="id" HorizontalAlignment="Left" Margin="36,6,0,0" VerticalAlignment="Top" Width="105"/>
         <Label Content="Soyad" HorizontalAlignment="Left" Margin="40,63,0,0" VerticalAlignment="Top"/>
         <Label Content="Tc No" HorizontalAlignment="Left" Margin="40,98,0,0" VerticalAlignment="Top"/>
         <Label Content="Adres" HorizontalAlignment="Left" Margin="40,144,0,0" VerticalAlignment="Top"/>
@@ -20,7 +19,7 @@
         <TextBox x:Name="CepTelefonu" HorizontalAlignment="Left" Margin="200,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="EkleBtn" Content="Ekle" HorizontalAlignment="Left" Margin="270,244,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_1"/>
         <Button Content="Listeye Dön" HorizontalAlignment="Left" Margin="40,244,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <TextBox x:Name="Id" HorizontalAlignment="Left" Margin="200,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Id" Visibility="Hidden" HorizontalAlignment="Left" Margin="200,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

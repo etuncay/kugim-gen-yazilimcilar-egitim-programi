@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPFMuhasebeUygulamasi.musteri.Models;
+using WPFMuhasebeUygulamasi.satis;
 
 namespace WPFMuhasebeUygulamasi.musteri
 {
@@ -74,7 +75,20 @@ namespace WPFMuhasebeUygulamasi.musteri
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            var seciliMusteri = (MusteriDbModel)MusteriDataGrid.SelectedItem;
 
+            if (seciliMusteri != null)
+            {
+                var musteriYonetim = new MusteriYonetim();
+
+                musteriYonetim.Sil(seciliMusteri.Id);
+
+                musteriYonetim.DataGridYenile(MusteriDataGrid);
+            }
+            else
+            {
+                MessageBox.Show("Bir seçim yapınız");
+            }
         }
     }
 }
