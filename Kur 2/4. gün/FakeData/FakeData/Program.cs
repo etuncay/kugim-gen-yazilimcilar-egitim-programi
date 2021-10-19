@@ -81,10 +81,17 @@ namespace FakeData
                 var kullaniciId = 5;
                 foreach (var basvuru in con.Query<int>("Select top 55 Id from basvuru.Basvuru"))
                 {
-                    var queryOgrenci = $"INSERT INTO UZEM.ogrenci.Ogrenci (BasvuruId,NufusId,Numara,BirimId,GirisYili,KullaniciId,Donem) " +
-                        $"VALUES({basvuru}, {nufusId++}, N'{faker.Random.Number(100000000, 999999999)}', 8, 2021, {kullaniciId++},1);";
+                    try
+                    {
+                        var queryOgrenci = $"INSERT INTO UZEM.ogrenci.Ogrenci (BasvuruId,NufusId,Numara,BirimId,GirisYili,KullaniciId,Donem) " +
+                      $"VALUES({basvuru}, {nufusId++}, N'{faker.Random.Number(100000000, 999999999)}', 8, 2021, {kullaniciId++},1);";
 
-                    con.Query(queryOgrenci);
+                        con.Query(queryOgrenci);
+                    }
+                    catch(Exception e)
+                    {
+
+                    }
                 }
 
             }
