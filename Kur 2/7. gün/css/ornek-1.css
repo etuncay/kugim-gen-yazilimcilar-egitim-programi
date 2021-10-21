@@ -1,0 +1,82 @@
+h1, h2, h3, h4, h5{
+    color: darkred;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+form div{
+    margin-top: 20px;
+}
+form div label{
+    color: darkgreen !important;
+    font-size: 15px;
+    background-color: yellow;
+    padding:5px 50px 5px 10px;
+    text-align: right;
+    width: 250px;
+    display: block;
+    float: left;
+} 
+
+form div label::after{
+    content: ' ';
+}
+
+form div label.zorunlu::before{
+    content: ' *';
+}
+
+form div input{
+    padding:20px 50px 5px 10px; 
+}
+
+form div input[type="password"]{
+    border:1px solid red;
+}
+form div textarea{
+    border:1px solid yellow;
+}
+
+form div textarea{
+    padding:0 50px 50px 10px;
+}
+
+a:visited{
+    color: turquoise;
+}
+
+input:focus {
+    border: 5px dotted chartreuse;
+}
+
+input:hover {
+    border: 3px solid tomato;
+}
+
+a:link {
+    color:yellowgreen,
+}
+
+ul.baslikli li:first-child{
+    font-size: xx-large;
+    color: tomato;
+}
+
+a:visited:hover {
+    color: pink;
+    } 
+
+    .haber{
+        text-align: left;
+        line-height:10px;
+        word-spacing:5px;
+        letter-spacing:10px;
+    }
+
+.haber:first-letter{
+    font-size: 50px;
+}
+
+table tr td{
+    height: 100px;
+    vertical-align: bottom;
+}
