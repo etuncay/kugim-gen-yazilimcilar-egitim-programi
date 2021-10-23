@@ -1,0 +1,27 @@
+body{
+    background:url('https://cdn5.vectorstock.com/i/thumb-large/19/74/small-star-pattern-on-light-background-vector-1111974.jpg');
+}
+
+.kutu{
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    min-width: 200px;
+    max-width: 400px;
+    max-height: 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    float: left; 
+    position: absolute;
+}
+
+div#solMenu {
+    clear: both;
+    
+    width: 200px;
+    height: 120px;
+    background: #bbbbbb;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+    

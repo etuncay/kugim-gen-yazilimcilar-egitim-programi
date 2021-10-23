@@ -1,0 +1,13 @@
+table.otomatik {
+    table-layout: fixed; 
+    width: 350px;
+    border-collapse: initial;
+    }
+    table.sabit {
+    table-layout: fixed;
+    width: 350px;
+    border-collapse: collapse;
+    }
+    td, th {
+    border: 2px dotted gray;
+    } 
