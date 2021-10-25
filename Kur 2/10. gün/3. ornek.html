@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <script>
+            function Kaydet(){
+                var kullaniciAdi = document.getElementById("kullaniciAdi").value;
+                var sifre = document.getElementById("sifre").value;
+                if(kullaniciAdi!="" && sifre!=""){
+                    if(kullaniciAdi=="ali" && sifre=="1234"){
+                        document.getElementById("mesaj").innerHTML = "Giriş Yaptın";
+
+                    }else{
+                        document.getElementById("mesaj").innerHTML = "Kullanıcı adı veya şifre yanlış";
+
+                    }
+                }else{
+                    document.getElementById("mesaj").innerHTML = "Kullanıcı adı veya şifre boş olamaz";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>Kullanıcı Adı </td>
+                <td>:</td>
+                <td><input type="text" id="kullaniciAdi"></td>
+            </tr>
+            <tr>
+                <td>Şifre</td>
+                <td>:</td>
+                <td><input type="password" id="sifre"></td>
+            </tr>
+        </table>
+        <button onclick="Kaydet()">Kadyet</button>
+        <p id="mesaj"></p>   
+    </body>
+</html>

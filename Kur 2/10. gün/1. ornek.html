@@ -1,0 +1,115 @@
+<html>
+    <head>
+            <script type="text/javascript">
+                var yas = 20;
+                var ad = "Emrullah";
+                const enYuksekNot = 100;
+                document.writeln(yas++);
+                document.writeln(yas);  
+                document.writeln(++yas);  
+                //alert("Merhaba Dünya!");
+                if(yas>20){
+                    document.writeln("Askere git")
+                }else{
+                    document.writeln("Eve git")
+                }
+                var dogrumu = false;
+                document.writeln(dogrumu)
+                var dogrutersle = !dogrumu;
+                document.writeln(dogrutersle);
+                var sayi = 1453;
+                var kelime = "1453";
+                document.writeln(sayi === kelime);
+                document.writeln(sayi == kelime);
+                
+                
+                if(yas>20 || dogrumu==true){
+                    document.writeln("Kontrol edildi - 1");
+                }
+                
+                var kontrol1 = yas>20 && dogrumu?'Kontrol başarılı':'Kontrol başarısız';
+                document.writeln(kontrol1);
+               yas =  prompt("Yaşınız Kaç",yas);
+               var yasDogrumu = confirm("Yaşınız" + yas + " mı");
+               if(yasDogrumu){
+                document.writeln("Yaşınız" + yas); 
+               }else{
+                document.writeln("Yaşınız yanlış"); 
+               }
+               var soyad ='asda';
+               var yasString = "33";
+               document.writeln(typeof(yasString));
+               var yasint = parseInt(yasString);
+               document.writeln(typeof(yasint));
+               var yasString2 = yasint.toString();
+               document.writeln(typeof(yasString2));
+               document.write("<br>");
+               for(var i =0; i <= 10;i++){
+                   for(var j =0; j<=i;j++){
+                       document.writeln("*");
+                   }  
+                   document.write("<br>");
+               }   
+               document.write("<br>");
+               while(false){
+                   document.writeln("Hiç girmeyecek")
+               }
+               document.write("<br>");
+               do{
+                document.writeln("1 kere girecek")
+
+               }while(false)
+               
+               //break; 
+               
+               //continue; 
+               var dizi = new Array();
+               
+               dizi.push(10);
+               dizi.push("Merhab");
+               dizi.push(3.14);
+               dizi.push({ad:'Ahmet'})
+
+               for(var d = 0; d<dizi.length; d++){
+                   document.write("\n");
+                   document.writeln(dizi[d]);
+               }  
+
+               var dizi2 = [];
+
+               dizi2[0] = "asdasd"; 
+
+               function topla(x, y){
+                   var t  = x+ y;
+                   return t;
+               }
+
+               var deger = topla(4,6);
+
+               function sehirleriListele(sehirler){
+                    for(var i =0; i< sehirler.length; i++){
+                        document.writeln("<br>")
+                        document.writeln("Şehir = "+ sehirler[i]);
+                    } 
+               }
+
+               var dizi = [];
+               for(var j =0; j<5;j++){
+                  // var deger = prompt("Şehir Giriniz");
+                   //dizi[j] = deger;
+                   dizi.push(deger);
+
+               }
+
+               sehirleriListele(dizi);
+               
+               function selamla(){
+                   document.writeln("<br>");
+                   document.writeln("HOŞGELDİNİZ")
+               }
+            </script>
+    </head>
+    <body onload="selamla()">
+        
+    </body>
+</html>

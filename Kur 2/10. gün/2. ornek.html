@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <script>
+            function selamla(){
+                alert("Tıladın");
+            }
+            function cifttikla(){
+                alert("Çift Tıkladın");
+            }
+
+            function uzerimdesin(){
+                alert("Üzerimdesin");
+            }
+
+            function degistim(){
+                alert("Değiştin");
+            }
+
+            function func1(){
+                alert("func1");
+            }
+
+            function func2(){
+                alert("func2");
+            }
+            
+            function func3(){
+                alert("func3");
+            }
+
+        </script>
+    </head>
+    <body>
+        <input type="text" onkeypress="func1()" onkeyup="func2()"  onkeydown="func3()">
+
+        <button onclick="selamla()">Tıkla</button>
+        <button ondblclick="cifttikla()">Çift Tıkla</button>
+        <button onmouseover="uzerimdesin()">Gezin</button>
+    </body>
+</html>
