@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <script>
+            function gId(id){
+                return document.getElementById(id)
+            }
+            
+            function topla(){
+                gId('islem').innerHTML = '+';
+                gId('sonuc').value = parseInt(gId('sayi1').value) + parseInt(gId('sayi2').value);
+            }
+            
+            function cikar(){
+                gId('islem').innerHTML = '-';
+                gId('sonuc').value = parseInt(gId('sayi1').value) - parseInt(gId('sayi2').value);
+            }
+
+            function carp(){
+                gId('islem').innerHTML = '*';
+                gId('sonuc').value = parseInt(gId('sayi1').value) * parseInt(gId('sayi2').value);
+            }
+
+            function bol(){
+                gId('islem').innerHTML = '/';
+                gId('sonuc').value = parseInt(gId('sayi1').value) / parseInt(gId('sayi2').value);
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <table onsubmit="false;">
+                <tr>
+                    <td><input type="number" style="width: 50px;" id="sayi1"></td>
+                    <td><span id="islem"></span></td>
+                    <td><input type="number" style="width: 50px;" id="sayi2"></td>
+                    <td>=</td>
+                    <td><input type="text"  style="width: 50px;" disabled id="sonuc"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <button type="button" onclick="topla()">+</button>
+                        <button type="button" onclick="cikar()">-</button>
+                        <button type="button" onclick="carp()">*</button>
+                        <button type="button" onclick="bol()">/</button>
+                        <button style="float: right;" type="reset">Reset</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
