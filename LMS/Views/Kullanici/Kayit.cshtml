@@ -1,0 +1,40 @@
+﻿@model LMS.Models.ViewModels.KullaniciKayitViewModel
+@{
+    ViewData["Title"] = "Kayit";
+    Layout = "~/Views/Shared/_FullLayout.cshtml";
+}
+
+<main class="form-signin">
+    <form asp-action="Kayit" method="post">
+        <h1 class="h3 mb-3 fw-normal">Kayıt Sayfası</h1>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-floating">
+            <input type="text" class="form-control" asp-for="Ad">
+            <label asp-for="Ad"></label>
+            <span asp-validation-for="Ad" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" asp-for="Soyad">
+            <label asp-for="Soyad"></label>
+            <span asp-validation-for="Soyad" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" asp-for="Eposta" placeholder="name@example.com">
+            <label asp-for="Eposta"></label>
+            <span asp-validation-for="Eposta" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" asp-for="Sifre" placeholder="Şifre">
+            <label asp-for="Sifre"></label>
+            <span asp-validation-for="Sifre" class="text-danger"></span>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" asp-for="SifreDogrula" placeholder="Şifre Doğrula">
+            <label asp-for="SifreDogrula"></label>
+            <span asp-validation-for="SifreDogrula" class="text-danger"></span>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Kayıt Ol</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+    </form>
+</main>
