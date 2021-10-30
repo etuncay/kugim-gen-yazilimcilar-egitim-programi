@@ -1,13 +1,17 @@
 using LMS.Models.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace LMS
@@ -25,8 +29,33 @@ namespace LMS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
+
+            services.AddSession();
+            services.AddHttpContextAccessor();
+
             services.AddDbContext<LMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+
+
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
 
         }
 
@@ -41,10 +70,25 @@ namespace LMS
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSession();
+            app.Use(async (context, next) =>
+            {
+                var token = context.Session.GetString("Token");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+                }
+
+                await next();
+            });
+
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
