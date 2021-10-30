@@ -1,4 +1,6 @@
-﻿using LMS.Models;
+﻿using LMS.Core;
+using LMS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace LMS.Controllers
 {
+    [JWTAuthorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+     
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
-        //Home/Index
         public IActionResult Index()
         {
             return View();

@@ -1,6 +1,10 @@
-﻿using LMS.Models.Data;
+﻿using LMS.Core.Interfaces;
+using LMS.Models.Data;
+using LMS.Models.Dto;
 using LMS.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +15,18 @@ namespace LMS.Controllers
     public class KullaniciController : Controller
     {
         private LMSDbContext _dbcontext;
+        private readonly IConfiguration _config;
+        private readonly ITokenService _tokenService;
 
-        public KullaniciController(LMSDbContext dbContext)
+        public KullaniciController(
+            LMSDbContext dbContext,
+            IConfiguration config,
+            ITokenService tokenService
+            )
         {
             _dbcontext = dbContext;
+            _config = config;
+            _tokenService = tokenService;
         }
 
         public IActionResult Index()
@@ -24,7 +36,41 @@ namespace LMS.Controllers
 
         public IActionResult Giris()
         {
+            
+            
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Giris(KullaniciGirisViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var query = _dbcontext.Kullanici.FirstOrDefault(q => q.Eposta == model.Eposta && q.Sifre == model.Sifre);
+                if (query != null)
+                {
+                    var kullaniciTokenDto = new KullaniciTokenDTO()
+                    {
+                        Id = query.Id,
+                        Ad = query.Ad,
+                        Soyad = query.Soyad,
+                        Eposta = query.Eposta,
+                        Yetki = query.Yetki
+                    };
+
+                    var generatedToken = _tokenService.BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), kullaniciTokenDto);
+
+                    if (generatedToken != null)
+                    {
+                        HttpContext.Session.SetString("Token", generatedToken);
+
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+
+            return View(model);
         }
 
         public IActionResult Kayit()
@@ -44,10 +90,10 @@ namespace LMS.Controllers
                     Soyad = model.Soyad,
                     Eposta = model.Eposta,
                     Sifre = model.Sifre,
-                    AktivasyonKey = "aktivasyon-key",
-                    AktivasyonSonTarihSaat = DateTime.Now.AddDays(3),
+                    Aktif = true
                 };
                 _dbcontext.Kullanici.Add(entity);
+
                 if (_dbcontext.SaveChanges() > 0)
                 {
                     return RedirectToAction("Giris");

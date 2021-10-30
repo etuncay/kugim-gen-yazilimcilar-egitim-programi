@@ -1,3 +1,5 @@
+using LMS.Core.Interfaces;
+using LMS.Core.Services;
 using LMS.Models.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -33,8 +35,9 @@ namespace LMS
             services.AddSession();
             services.AddHttpContextAccessor();
 
-            services.AddDbContext<LMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            services.AddTransient<ITokenService, TokenService>();
 
+            services.AddDbContext<LMSDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
 
             services.AddAuthentication(auth =>
             {
