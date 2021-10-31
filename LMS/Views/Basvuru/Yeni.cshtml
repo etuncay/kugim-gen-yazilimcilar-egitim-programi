@@ -1,0 +1,48 @@
+﻿@model LMS.Models.ViewModels.BasvuruKayitViewModel
+@{
+    ViewData["Title"] = "Yeni";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Yeni</h1>
+
+<form asp-action="Yeni" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Ad"></label>
+        <input type="text" asp-for="Ad" class="form-control" />
+        <span asp-validation-for="Ad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Soyad"></label>
+        <input type="text" asp-for="Soyad" class="form-control" />
+        <span asp-validation-for="Soyad" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TCNO"></label>
+        <input type="text" asp-for="TCNO" class="form-control" />
+        <span asp-validation-for="TCNO" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Eposta"></label>
+        <input type="email" asp-for="Eposta" class="form-control" />
+        <span asp-validation-for="Eposta" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CepTelefonu"></label>
+        <input type="text" asp-for="CepTelefonu" class="form-control" />
+        <span asp-validation-for="CepTelefonu" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BasvuruDosya"></label>
+        <input type="file" asp-for="BasvuruDosya" class="form-control" />
+        <span asp-validation-for="BasvuruDosya" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ResimDosya"></label>
+        <input type="file" asp-for="ResimDosya" class="form-control" />
+        <span asp-validation-for="ResimDosya" class="text-danger"></span>
+    </div>
+       <button type="submit" class="btn btn-primary w-100 btn-lg">Kaydet</button> 
+</form> 

@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using LMS.Core
 @{ 
     var _rol = User.Claims.Where(q => q.Type == ClaimTypes.Role).FirstOrDefault();
 }
@@ -65,7 +66,7 @@
                     <hr>
                     <ul class="nav nav-pills flex-column mb-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" aria-current="page">
+                            <a  asp-controller="Basvuru" asp-action="Yeni" class="nav-link active" aria-current="page">
                                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home" /></svg>
                                 Başvuru
                             </a>
@@ -81,7 +82,7 @@
                 </div>
 
 
-                @if (_rol.Value == "Ogrenci")
+                @if (_rol.Value == YetkiSabit.Ogrenci)
                 {
                     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
                         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -106,7 +107,7 @@
                         <hr>
                     </div>
                 }
-                else if (_rol.Value == "Idari")
+                else if (_rol.Value == YetkiSabit.Idari)
                 {
                     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
                         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -131,7 +132,7 @@
                         <hr>
                     </div>
                 }
-                else if (_rol.Value == "Akademik")
+                else if (_rol.Value == YetkiSabit.Akademik)
                 {
                     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
                         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -156,7 +157,7 @@
                         <hr>
                     </div>
                 }
-                else if (_rol.Value == "Yonetici")
+                else if (_rol.Value == YetkiSabit.Yonetici)
                 {
                     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
                         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">

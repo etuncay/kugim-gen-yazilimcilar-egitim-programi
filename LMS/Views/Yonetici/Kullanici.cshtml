@@ -1,0 +1,21 @@
+﻿@model LMS.Models.ViewModels.KullaniciViewModel
+@{
+    ViewData["Title"] = "Kullanici";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Kullanici</h1>
+
+<form method="post" asp-action="KullaniciYetkiKaydet">
+    <input name="kullaniciId" type="hidden" value="@Model.Id" />
+    <div class="form-group">
+        <label for="Sifre"></label>
+        <select  name="Yetki">
+            <option  value="Ogrenci" >Öğrenci</option>
+            <option value="Idari">İdari</option>
+            <option value="Akademik">Akademik</option>
+            <option value="Yonetici">Yönetici</option>
+        </select>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Kaydet</button>
+</form>

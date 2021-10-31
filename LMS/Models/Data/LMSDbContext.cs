@@ -12,6 +12,8 @@ namespace LMS.Models.Data
         public LMSDbContext(DbContextOptions<LMSDbContext> options): base(options){}
         
         public DbSet<KullaniciEntity> Kullanici { get; set; }
+        public DbSet<BasvuruEntity> Basvuru { get; set; }
+        public DbSet<BasvuruSureciEntity> BasvuruSureci { get; set; }
 
     }
 }
