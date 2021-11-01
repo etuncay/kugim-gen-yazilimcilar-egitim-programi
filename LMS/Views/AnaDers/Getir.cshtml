@@ -1,0 +1,21 @@
+﻿@model LMS.Models.ViewModels.AnaDersViewModel
+@{
+    ViewData["Title"] = "Getir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Getir</h1>
+
+<div class="card">
+    <div class="card-header">@Model.Ad</div>
+    <div class="card-body">
+        <div>
+            <h3>Açıklama</h3>
+            @Model.Aciklama
+        </div>
+        <div>
+            <h3>Aktif</h3>
+            @(Model.Aktif?"Aktif":"Pasif")
+        </div>
+    </div>
+</div>

@@ -14,6 +14,7 @@ namespace LMS.Models.Data
         public DbSet<KullaniciEntity> Kullanici { get; set; }
         public DbSet<BasvuruEntity> Basvuru { get; set; }
         public DbSet<BasvuruSureciEntity> BasvuruSureci { get; set; }
+        public DbSet<AnaDersEntity> AnaDers { get; set; }
 
     }
 }

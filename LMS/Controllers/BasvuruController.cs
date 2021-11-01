@@ -4,6 +4,7 @@ using LMS.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,8 +37,20 @@ namespace LMS.Controllers
 
             if (ModelState.IsValid)
             {
-                var basvuruDosyaYol = "";
-                var resimDosyaYol = "";
+                var basvuruDosyaYol = "file/"+model.BasvuruDosya.FileName;
+                var resimDosyaYol = "file/"+model.ResimDosya.FileName;
+                
+
+                using (Stream fileStream = new FileStream("wwwroot/"+basvuruDosyaYol, FileMode.Create))
+                {
+                    await model.BasvuruDosya.CopyToAsync(fileStream);
+                }
+
+                using (Stream fileStream = new FileStream("wwwroot/" + resimDosyaYol, FileMode.Create))
+                {
+                    await model.ResimDosya.CopyToAsync(fileStream);
+                }
+
 
                 var basvuruEntity = new BasvuruEntity()
                 {
@@ -52,6 +65,7 @@ namespace LMS.Controllers
                 };
 
                 _dbcontext.Basvuru.Add(basvuruEntity);
+
                 if (_dbcontext.SaveChanges() > 0)
                 {
                     var basvuruSureci = new BasvuruSureciEntity()

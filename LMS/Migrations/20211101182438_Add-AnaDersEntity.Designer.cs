@@ -4,14 +4,16 @@ using LMS.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    partial class LMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211101182438_Add-AnaDersEntity")]
+    partial class AddAnaDersEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,8 +47,6 @@ namespace LMS.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UstId");
 
                     b.ToTable("AnaDers");
                 });
@@ -160,15 +160,6 @@ namespace LMS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Kullanici");
-                });
-
-            modelBuilder.Entity("LMS.Models.Data.AnaDersEntity", b =>
-                {
-                    b.HasOne("LMS.Models.Data.AnaDersEntity", "UstAnaDers")
-                        .WithMany()
-                        .HasForeignKey("UstId");
-
-                    b.Navigation("UstAnaDers");
                 });
 
             modelBuilder.Entity("LMS.Models.Data.BasvuruSureciEntity", b =>

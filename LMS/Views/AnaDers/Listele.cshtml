@@ -1,0 +1,50 @@
+﻿@model List<LMS.Models.ViewModels.AnaDersViewModel>;
+@{
+    ViewData["Title"] = "Listele";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Listele</h1>
+<div class="card">
+    <div class="card-header">
+        Ana Dersler <a asp-action="Ekle" class="btn btn-primary" style="float:right;">Ekle</a>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ust Ders</th>
+                    <th>Ders</th>
+                    <th>Aktif</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UstId</td>
+                        <td>@item.Ad</td>
+                        <td>@(item.Aktif ? "Aktif" : "Pasif")</td>
+                        <td>
+                            <a href="/AnaDers/Getir/@item.Id">Göster</a>
+                            <a href="/AnaDers/Guncelle/@item.Id">Güncelle</a>
+                            <a href="#" onclick="sil(@item.Id)">Sil</a>
+                            <a href="/Ders/Listele/@item.Id">Dersler</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    function sil(id) {
+        var sonuc = confirm("Silmek İstiyormusunuz");
+        if (sonuc) {
+            window.location = "/AnaDers/Sil/" + id;
+        }
+    }
+</script>

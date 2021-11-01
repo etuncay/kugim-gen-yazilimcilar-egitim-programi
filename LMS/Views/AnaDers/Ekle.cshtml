@@ -1,0 +1,33 @@
+﻿@model LMS.Models.ViewModels.AnaDersKayitViewModel
+@{
+    ViewData["Title"] = "Ekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ekle</h1>
+
+<div class="card">
+    <div class="card-header">Yeni Ana Ders Ekleme</div>
+    <div class="card-body">
+        <form method="post" asp-action="Ekle">
+            <input type="hidden" asp-for="UstId" />
+            <div class="form-group">
+                <label asp-for="Ad"></label>
+                <input type="text" asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama"></label>
+                <textarea asp-for="Aciklama" class="form-control"></textarea>
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aktif"></label>
+                <input type="checkbox" asp-for="Aktif" class="form-check"/>
+                <span asp-validation-for="Aktif"></span>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Ekle</button>
+        </form>
+    </div>
+</div>
