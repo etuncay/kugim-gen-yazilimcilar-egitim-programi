@@ -31,7 +31,7 @@ namespace LMS.Controllers
 
         [HttpPost]
 
-        public IActionResult Yeni(BasvuruKayitViewModel model)
+        public async Task<IActionResult> Yeni(BasvuruKayitViewModel model)
         {
 
             if (ModelState.IsValid)
