@@ -1,0 +1,77 @@
+﻿@model LMS.Models.ViewModels.IletisimViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="card">
+    <div class="card-header">@User.Identity.Name  İletişim Bilgileri</div>
+    <div class="card-body">
+        @if (!String.IsNullOrEmpty(ViewBag.Mesaj))
+        {
+            <span class="alert alert-info">@ViewBag.Mesaj</span>
+        }
+        <form asp-action="Kaydet" method="post">
+            <div class="form-group">
+                <label asp-for="IlId"></label>
+                <select asp-for="IlId" class="form-control" onchange="ilSelected()" asp-items="@(new SelectList(ViewBag.Il,"Id","Tanim", Model.IlId))">
+                    <option>Lütfen Seçim Yapınız</option>
+
+                </select>
+                <span asp-validation-for="IlId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IlceId"></label>
+                <select asp-for="IlceId" class="form-control"></select>
+                <span asp-validation-for="IlceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adres"></label>
+                <textarea asp-for="Adres" class="form-control"></textarea>
+                <span asp-validation-for="Adres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefon"></label>
+                <input asp-for="Telefon" type="tel" class="form-control" />
+                <span asp-validation-for="Adres" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary ">Kaydet</button>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script>
+
+        
+        function ilceGuncelle(ilceId) {
+            var ilId = document.getElementById("IlId").value
+
+            var optionItems = "";
+            $.get('/Ilce/JsonSelectList?ilId=' + ilId, function (data) {
+
+                $.each(data, function (key, item) {
+                    var selected = "";
+                    if (item.value == ilceId) {
+                        selected ="selected"
+                    }
+                    optionItems += "<option " + selected+" value='" + item.value + "' >" + item.text + "</option>"
+
+                });
+                document.getElementById('IlceId').innerHTML = optionItems;
+            });
+
+        }
+
+        function ilSelected() {
+            ilceGuncelle(@Model.IlceId)
+        }
+
+        ilSelected();
+
+    </script>
+}

@@ -31,14 +31,13 @@ namespace LMS.Controllers
         }
 
         [HttpPost]
-
-        public async Task<IActionResult> Yeni(BasvuruKayitViewModel model)
+        public async Task<IActionResult> Yeni([FromForm] BasvuruKayitViewModel model)
         {
 
             if (ModelState.IsValid)
             {
-                var basvuruDosyaYol = "file/"+model.BasvuruDosya.FileName;
-                var resimDosyaYol = "file/"+model.ResimDosya.FileName;
+                var basvuruDosyaYol = "file/"+ Guid.NewGuid() +"-"+model.BasvuruDosya.FileName;
+                var resimDosyaYol = "file/"+ Guid.NewGuid() +"-"+ model.ResimDosya.FileName;
                 
 
                 using (Stream fileStream = new FileStream("wwwroot/"+basvuruDosyaYol, FileMode.Create))

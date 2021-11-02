@@ -4,14 +4,16 @@ using LMS.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LMS.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    partial class LMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211102183046_Il-Ilce-Eklendi")]
+    partial class IlIlceEklendi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,40 +171,6 @@ namespace LMS.Migrations
                     b.ToTable("Ilce");
                 });
 
-            modelBuilder.Entity("LMS.Models.Data.Iletisim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Adres")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("GuncellenmeTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IlceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("KullaniciId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("OlusturulmaTarihi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Telefon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IlceId");
-
-                    b.HasIndex("KullaniciId");
-
-                    b.ToTable("Iletisim");
-                });
-
             modelBuilder.Entity("LMS.Models.Data.KullaniciEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -272,25 +240,6 @@ namespace LMS.Migrations
                         .IsRequired();
 
                     b.Navigation("Il");
-                });
-
-            modelBuilder.Entity("LMS.Models.Data.Iletisim", b =>
-                {
-                    b.HasOne("LMS.Models.Data.IlceEntity", "Ilce")
-                        .WithMany()
-                        .HasForeignKey("IlceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("LMS.Models.Data.KullaniciEntity", "Kullanici")
-                        .WithMany()
-                        .HasForeignKey("KullaniciId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ilce");
-
-                    b.Navigation("Kullanici");
                 });
 
             modelBuilder.Entity("LMS.Models.Data.BasvuruEntity", b =>

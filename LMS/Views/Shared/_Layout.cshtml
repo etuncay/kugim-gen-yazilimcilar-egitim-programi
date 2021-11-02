@@ -42,7 +42,7 @@
                             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                                 <li> <span>@User.Identity.Name</span></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">New project...</a></li>
+                                <li><a class="dropdown-item" href="/Iletisim">İletişim</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><hr class="dropdown-divider"></li>
@@ -191,10 +191,11 @@
             
     </div>
 
-    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/sidebars.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
