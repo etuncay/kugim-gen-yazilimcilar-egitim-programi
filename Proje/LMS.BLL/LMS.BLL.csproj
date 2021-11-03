@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LMS.Core\LMS.Core.csproj" />
+    <ProjectReference Include="..\LMS.Data\LMS.Data.csproj" />
+    <ProjectReference Include="..\LMS.Models\LMS.Models.csproj" />
+  </ItemGroup>
+
+</Project>
