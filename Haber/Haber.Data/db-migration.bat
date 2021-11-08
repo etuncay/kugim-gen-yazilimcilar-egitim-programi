@@ -1,0 +1,1 @@
+dotnet ef --startup-project ..\Haber.WebApi\ migrations add %1

@@ -1,0 +1,1 @@
+dotnet ef --startup-project  ..\Haber.WebApi\Haber.WebApi.csproj database update -p Haber.Data.csproj --verbose
