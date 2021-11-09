@@ -1,4 +1,5 @@
 ﻿
+using AutoMapper;
 using Haber.Core.Interfaces.Services;
 using Haber.Data;
 using Haber.Models.ViewModels;
@@ -13,10 +14,17 @@ namespace Haber.Services
     public class KullaniciService : IKullaniciService
     {
         private readonly HaberDbContext _haberDbContext;
-
-        public KullaniciService(HaberDbContext haberDbContext)
+        private readonly IMapper _mapper;
+        private readonly IPasswordHasher _passwordHasher;
+        public KullaniciService(
+            HaberDbContext haberDbContext,
+            IMapper mapper,
+            IPasswordHasher passwordHasher
+            )
         {
             _haberDbContext = haberDbContext;
+            _mapper = mapper;
+            _passwordHasher = passwordHasher;
         }
 
         public ResponseResultModel<KullaniciResponseViewModel> Giris(string kullaniciAdi, string sifre)
@@ -29,15 +37,8 @@ namespace Haber.Services
             {
                 if(query.Sifre == sifre)
                 {
-                    result.Data = new KullaniciResponseViewModel() {
-                        Id  = query.Id,
-                        Ad = query.Ad,
-                        Soyad = query.Soyad,
-                        KullaniciAdi = query.KullaniciAdi,
-                        Eposta = query.Eposta,
-                        OlusturulmaTarihi = query.OlusturulmaTarihi,
-                        GuncellenmeTarihi = query.GuncellenmeTarihi
-                    };
+                    result.Data = _mapper.Map<KullaniciResponseViewModel>(query);
+                        
 
                     result.Type = Models.Enums.EnumResponseResultType.Success;
                     result.Message = "Kullanıcı Bulundu.";
@@ -61,29 +62,26 @@ namespace Haber.Services
         {
             var result = new ResponseResultModel<List<KullaniciResponseViewModel>>();
 
+            result.Data = new List<KullaniciResponseViewModel>();
+
             foreach (var kullanici in _haberDbContext.Kullanici.ToList())
             {
-                result.Data.Add(new KullaniciResponseViewModel() {
-                    Id = kullanici.Id,
-                    Ad = kullanici.Ad,
-                    Soyad = kullanici.Soyad,
-                    KullaniciAdi = kullanici.KullaniciAdi,
-                    Eposta = kullanici.Eposta,
-                    OlusturulmaTarihi = kullanici.OlusturulmaTarihi,
-                    GuncellenmeTarihi = kullanici.GuncellenmeTarihi
-                });
+                var data = _mapper.Map<KullaniciResponseViewModel>(kullanici);
+
+                result.Data.Add(data);
+
             }
 
             if (result.Data.Count() > 0)
             {
                 result.Type = Models.Enums.EnumResponseResultType.Success;
-                result.Message = "Keyıt bulundu";
+                result.Message = "Kayıt bulundu";
                 result.TotalCount = result.Data.Count();
             }
             else
             {
                 result.Type = Models.Enums.EnumResponseResultType.Info;
-                result.Message = "Keyıt bulunamadı";
+                result.Message = "Kayıt bulunamadı";
             }
 
             return result;
@@ -97,16 +95,7 @@ namespace Haber.Services
 
             if (query != null)
             {
-                result.Data = new KullaniciResponseViewModel()
-                {
-                    Id = query.Id,
-                    Ad = query.Ad,
-                    Soyad = query.Soyad,
-                    KullaniciAdi = query.KullaniciAdi,
-                    Eposta = query.Eposta,
-                    OlusturulmaTarihi = query.OlusturulmaTarihi,
-                    GuncellenmeTarihi = query.GuncellenmeTarihi
-                };
+                result.Data = _mapper.Map<KullaniciResponseViewModel>(query);
 
                 result.Type = Models.Enums.EnumResponseResultType.Success;
                 result.Message = "Kullanıcı Bulundu.";
@@ -123,25 +112,126 @@ namespace Haber.Services
 
         public ResponseResultModel<int> Ekle(KullaniciRequestViewModel model)
         {
-            throw new NotImplementedException();
+            var result =new ResponseResultModel<int>();
+
+            model.Sifre = _passwordHasher.Hash(model.Sifre);
+
+            var entity = _mapper.Map<KullaniciEntity>(model);
+
+            _haberDbContext.Kullanici.Add(entity);
+
+
+            if (_haberDbContext.SaveChanges() > 0)
+            {
+                result.Message = "Kayıt işlemi yapıldı";
+                result.Data = entity.Id;
+                result.Type = Models.Enums.EnumResponseResultType.Success;
+            }
+            else
+            {
+                result.Message = "Kayıt işlemi yapılamadı";
+                result.Type = Models.Enums.EnumResponseResultType.Error;
+            }
+
+
+            return result;
         }
 
 
-        public ResponseResultModel Guncelle(int id, KullaniciResponseViewModel mode)
+        public ResponseResultModel Guncelle(int id, KullaniciRequestViewModel model)
         {
-            throw new NotImplementedException();
+            var result = new ResponseResultModel();
+
+            var query = _haberDbContext.Kullanici.FirstOrDefault(q=>q.Id == id);
+            if (query != null)
+            {
+                query.Ad = model.Ad;
+                query.Soyad = model.Soyad;
+                query.Eposta = model.Eposta;
+                query.KullaniciAdi = model.KullaniciAdi;
+                query.GuncellenmeTarihi = DateTime.Now;
+
+                if (_haberDbContext.SaveChanges() > 0)
+                {
+                    result.Message = "Güncelleme yapıldı";
+                    result.Type = Models.Enums.EnumResponseResultType.Success;
+                }
+                else
+                {
+                    result.Message = "Güncelleme yapılamadı";
+                    result.Type = Models.Enums.EnumResponseResultType.Error;
+                }
+
+            }
+            else
+            {
+                result.Message = "Kullanıcı bulunamadı";
+                result.Type = Models.Enums.EnumResponseResultType.Warning;
+            }
+
+            return result;
         }
 
         
 
-        public ResponseResultModel SifreGuncelle(string kullaniciAdi, string yeniSifre)
+        public ResponseResultModel SifreGuncelle(int id, string yeniSifre)
         {
-            throw new NotImplementedException();
+            var result = new ResponseResultModel();
+            var query = _haberDbContext.Kullanici.FirstOrDefault(q => q.Id == id);
+
+            if (query != null)
+            {
+                query.Sifre = _passwordHasher.Hash(yeniSifre+id);
+                if (_haberDbContext.SaveChanges() > 0)
+                {
+                    result.Message = "Şifre Güncellemesi yapıldı";
+                    result.Type = Models.Enums.EnumResponseResultType.Success;
+                }
+                else
+                {
+                    result.Message = "Şifre Güncellemesi yapılamadı";
+                    result.Type = Models.Enums.EnumResponseResultType.Error;
+                }
+            }
+            else
+            {
+                result.Message = "Kullanıcı bulunamadı";
+                result.Type = Models.Enums.EnumResponseResultType.Warning;
+            }
+
+
+            return result;
         }
 
         public ResponseResultModel Sil(int id)
         {
-            throw new NotImplementedException();
+            var result = new ResponseResultModel();
+
+            var query = _haberDbContext.Kullanici.FirstOrDefault(q=>q.Id == id);
+
+            if (query != null)
+            {
+                _haberDbContext.Kullanici.Remove(query);
+                if (_haberDbContext.SaveChanges() > 0)
+                {
+                    result.Message = "Silme yapıldı";
+                    result.Type = Models.Enums.EnumResponseResultType.Success;
+                }
+                else
+                {
+                    result.Message = "Silme yapılamadı";
+                    result.Type = Models.Enums.EnumResponseResultType.Error;
+                }
+            }
+            else
+            {
+                result.Message = "Kullanıcı bulunamadı";
+                result.Type = Models.Enums.EnumResponseResultType.Warning;
+
+            }
+
+
+            return result;
         }
     }
 }

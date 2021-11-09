@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+ <PackageReference Include="AutoMapper" Version="10.1.1" />
+ <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
       <PrivateAssets>all</PrivateAssets>
@@ -21,11 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Haber.Data\Haber.Data.csproj" />
+    <ProjectReference Include="..\Haber.Services\Haber.Services.csproj" />
   </ItemGroup>
 
 </Project>

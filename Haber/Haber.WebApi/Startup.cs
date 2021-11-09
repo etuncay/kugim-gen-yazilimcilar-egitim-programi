@@ -1,4 +1,8 @@
+using Haber.Core;
+using Haber.Core.Interfaces.Services;
 using Haber.Data;
+using Haber.Services;
+using Haber.Services.Password;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,7 +38,11 @@ namespace Haber.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Haber.WebApi", Version = "v1" });
             });
+            services.AddSingleton<IPasswordHasher>(new PasswordHasher());
 
+            services.AddScoped<IKullaniciService, KullaniciService>();
+
+            services.AddAutoMapper(c => c.AddProfile<AutoMapperProfile>(), typeof(Startup));
             services.AddDbContext<HaberDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
         }
 

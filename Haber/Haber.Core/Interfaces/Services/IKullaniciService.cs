@@ -14,10 +14,10 @@ namespace Haber.Core.Interfaces.Services
         ResponseResultModel<List<KullaniciResponseViewModel>> Listele();
         ResponseResultModel<KullaniciResponseViewModel> Getir(int id);
         ResponseResultModel<int> Ekle(KullaniciRequestViewModel model);
-        ResponseResultModel Guncelle(int id, KullaniciResponseViewModel mode);
+        ResponseResultModel Guncelle(int id, KullaniciRequestViewModel model);
         ResponseResultModel Sil(int id);
         ResponseResultModel<KullaniciResponseViewModel> Giris(string kullaniciAdi, string sifre);
-        ResponseResultModel SifreGuncelle(string kullaniciAdi, string yeniSifre);
+        ResponseResultModel SifreGuncelle(int id, string yeniSifre);
 
     }
 }
