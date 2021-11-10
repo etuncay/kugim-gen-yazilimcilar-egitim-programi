@@ -1,10 +1,13 @@
 ﻿
 using AutoMapper;
+using FluentValidation.Results;
 using Haber.Core.Interfaces.Services;
+using Haber.Core.Validator;
 using Haber.Data;
 using Haber.Models.ViewModels;
 using Haber.Models.ViewModels.Request;
 using Haber.Models.ViewModels.Response;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +34,7 @@ namespace Haber.Services
         {
             var result = new ResponseResultModel<KullaniciResponseViewModel>();
 
-            var query = _haberDbContext.Kullanici.Where(q => q.KullaniciAdi == kullaniciAdi).FirstOrDefault();
+            var query = _haberDbContext.Kullanici.Include(q=>q.KullaniciYetki).Where(q => q.KullaniciAdi == kullaniciAdi).FirstOrDefault();
 
             if (query != null)
             {
@@ -64,7 +67,7 @@ namespace Haber.Services
 
             result.Data = new List<KullaniciResponseViewModel>();
 
-            foreach (var kullanici in _haberDbContext.Kullanici.ToList())
+            foreach (var kullanici in _haberDbContext.Kullanici.Include(q => q.KullaniciYetki).ToList())
             {
                 var data = _mapper.Map<KullaniciResponseViewModel>(kullanici);
 
@@ -91,7 +94,7 @@ namespace Haber.Services
         {
             var result = new ResponseResultModel<KullaniciResponseViewModel>();
 
-            var query = _haberDbContext.Kullanici.Where(q => q.Id == id).FirstOrDefault();
+            var query = _haberDbContext.Kullanici.Include(q => q.KullaniciYetki).Where(q => q.Id == id).FirstOrDefault();
 
             if (query != null)
             {
@@ -112,25 +115,34 @@ namespace Haber.Services
 
         public ResponseResultModel<int> Ekle(KullaniciRequestViewModel model)
         {
-            var result =new ResponseResultModel<int>();
+            KullaniciRequestValidator validator = new KullaniciRequestValidator();
 
-            model.Sifre = _passwordHasher.Hash(model.Sifre);
-
-            var entity = _mapper.Map<KullaniciEntity>(model);
-
-            _haberDbContext.Kullanici.Add(entity);
-
-
-            if (_haberDbContext.SaveChanges() > 0)
+            ValidationResult validate = validator.Validate(model);
+            var result = new ResponseResultModel<int>();
+            if (validate.IsValid)
             {
-                result.Message = "Kayıt işlemi yapıldı";
-                result.Data = entity.Id;
-                result.Type = Models.Enums.EnumResponseResultType.Success;
+                model.Sifre = _passwordHasher.Hash(model.Sifre);
+
+                var entity = _mapper.Map<KullaniciEntity>(model);
+
+                _haberDbContext.Kullanici.Add(entity);
+
+
+                if (_haberDbContext.SaveChanges() > 0)
+                {
+                    result.Message = "Kayıt işlemi yapıldı";
+                    result.Data = entity.Id;
+                    result.Type = Models.Enums.EnumResponseResultType.Success;
+                }
+                else
+                {
+                    result.Message = "Kayıt işlemi yapılamadı";
+                    result.Type = Models.Enums.EnumResponseResultType.Error;
+                }
             }
             else
             {
-                result.Message = "Kayıt işlemi yapılamadı";
-                result.Type = Models.Enums.EnumResponseResultType.Error;
+                result.SetErrors(validate);
             }
 
 
@@ -142,32 +154,44 @@ namespace Haber.Services
         {
             var result = new ResponseResultModel();
 
-            var query = _haberDbContext.Kullanici.FirstOrDefault(q=>q.Id == id);
-            if (query != null)
-            {
-                query.Ad = model.Ad;
-                query.Soyad = model.Soyad;
-                query.Eposta = model.Eposta;
-                query.KullaniciAdi = model.KullaniciAdi;
-                query.GuncellenmeTarihi = DateTime.Now;
+            KullaniciRequestValidator validator = new KullaniciRequestValidator();
 
-                if (_haberDbContext.SaveChanges() > 0)
+            ValidationResult validate = validator.Validate(model);
+            if (validate.IsValid)
+            {
+                var query = _haberDbContext.Kullanici.FirstOrDefault(q => q.Id == id);
+                if (query != null)
                 {
-                    result.Message = "Güncelleme yapıldı";
-                    result.Type = Models.Enums.EnumResponseResultType.Success;
+                    query.Ad = model.Ad;
+                    query.Soyad = model.Soyad;
+                    query.Eposta = model.Eposta;
+                    query.KullaniciAdi = model.KullaniciAdi;
+                    query.GuncellenmeTarihi = DateTime.Now;
+
+                    if (_haberDbContext.SaveChanges() > 0)
+                    {
+                        result.Message = "Güncelleme yapıldı";
+                        result.Type = Models.Enums.EnumResponseResultType.Success;
+                    }
+                    else
+                    {
+                        result.Message = "Güncelleme yapılamadı";
+                        result.Type = Models.Enums.EnumResponseResultType.Error;
+                    }
+
                 }
                 else
                 {
-                    result.Message = "Güncelleme yapılamadı";
-                    result.Type = Models.Enums.EnumResponseResultType.Error;
+                    result.Message = "Kullanıcı bulunamadı";
+                    result.Type = Models.Enums.EnumResponseResultType.Warning;
                 }
-
             }
             else
             {
-                result.Message = "Kullanıcı bulunamadı";
-                result.Type = Models.Enums.EnumResponseResultType.Warning;
+                result.SetErrors(validate);
             }
+
+            
 
             return result;
         }

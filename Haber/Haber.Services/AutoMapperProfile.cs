@@ -19,7 +19,10 @@ namespace Haber.Services
         public AutoMapperProfile()
         {
 
-            CreateMap<KullaniciEntity, KullaniciResponseViewModel>().ReverseMap();
+            CreateMap<KullaniciEntity, KullaniciResponseViewModel>()
+                .ForMember(q=>q.Yetkiler , opt => opt.MapFrom(src => src.KullaniciYetki.Select(q=>q.Yetki)))
+                .ReverseMap();
+
             CreateMap<KullaniciRequestViewModel, KullaniciEntity>().ReverseMap();
         }
     }

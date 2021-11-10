@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Haber.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Haber.Models.ViewModels.Response
         public string Eposta { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
+        public List<EnumYetki> Yetkiler { get; set; } = new List<EnumYetki>();
     }
 }
