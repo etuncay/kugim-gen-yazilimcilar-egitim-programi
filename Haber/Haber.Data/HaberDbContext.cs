@@ -9,6 +9,12 @@ namespace Haber.Data
 
         public DbSet<KullaniciEntity> Kullanici { get; set; }
         public DbSet<KullaniciYetkiEntity> KullaniciYetki { get; set; }
+        public DbSet<KategoriEntity> Kategori { get; set; }
+        public DbSet<YorumEntity> Yorum { get; set; }
+        public DbSet<ResimEntity> Resim { get; set; }
+        public DbSet<EtiketEntity> Etiket { get; set; }
+        public DbSet<IcerikEntity> Icerik { get; set; }
+        public DbSet<IcerikEtiketEntity> IcerikEtiket { get; set; }
 
     }
 }
