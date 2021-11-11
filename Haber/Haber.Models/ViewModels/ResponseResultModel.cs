@@ -31,6 +31,20 @@ namespace Haber.Models.ViewModels
                 Messages.Add(error.PropertyName, error.ErrorMessage);
             }
         }
+
+        public void SaveChange(int i, string message = "İşlem yapıldı")
+        {
+            if (i > 0)
+            {
+                Type = EnumResponseResultType.Success;
+                Message = message;
+            }
+            else
+            {
+                Type = EnumResponseResultType.Error;
+                Message = "İşlem yapılamadı";
+            }
+        }
     }
 
 

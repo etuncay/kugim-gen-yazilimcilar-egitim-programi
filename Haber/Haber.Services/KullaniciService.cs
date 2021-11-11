@@ -128,17 +128,9 @@ namespace Haber.Services
                 _haberDbContext.Kullanici.Add(entity);
 
 
-                if (_haberDbContext.SaveChanges() > 0)
-                {
-                    result.Message = "Kayıt işlemi yapıldı";
-                    result.Data = entity.Id;
-                    result.Type = Models.Enums.EnumResponseResultType.Success;
-                }
-                else
-                {
-                    result.Message = "Kayıt işlemi yapılamadı";
-                    result.Type = Models.Enums.EnumResponseResultType.Error;
-                }
+                result.SaveChange(_haberDbContext.SaveChanges());
+                result.Data = entity.Id;
+                
             }
             else
             {
@@ -168,16 +160,7 @@ namespace Haber.Services
                     query.KullaniciAdi = model.KullaniciAdi;
                     query.GuncellenmeTarihi = DateTime.Now;
 
-                    if (_haberDbContext.SaveChanges() > 0)
-                    {
-                        result.Message = "Güncelleme yapıldı";
-                        result.Type = Models.Enums.EnumResponseResultType.Success;
-                    }
-                    else
-                    {
-                        result.Message = "Güncelleme yapılamadı";
-                        result.Type = Models.Enums.EnumResponseResultType.Error;
-                    }
+                    result.SaveChange(_haberDbContext.SaveChanges());
 
                 }
                 else
@@ -206,16 +189,7 @@ namespace Haber.Services
             if (query != null)
             {
                 query.Sifre = _passwordHasher.Hash(yeniSifre+id);
-                if (_haberDbContext.SaveChanges() > 0)
-                {
-                    result.Message = "Şifre Güncellemesi yapıldı";
-                    result.Type = Models.Enums.EnumResponseResultType.Success;
-                }
-                else
-                {
-                    result.Message = "Şifre Güncellemesi yapılamadı";
-                    result.Type = Models.Enums.EnumResponseResultType.Error;
-                }
+                result.SaveChange(_haberDbContext.SaveChanges());
             }
             else
             {
@@ -236,16 +210,7 @@ namespace Haber.Services
             if (query != null)
             {
                 _haberDbContext.Kullanici.Remove(query);
-                if (_haberDbContext.SaveChanges() > 0)
-                {
-                    result.Message = "Silme yapıldı";
-                    result.Type = Models.Enums.EnumResponseResultType.Success;
-                }
-                else
-                {
-                    result.Message = "Silme yapılamadı";
-                    result.Type = Models.Enums.EnumResponseResultType.Error;
-                }
+                result.SaveChange(_haberDbContext.SaveChanges());
             }
             else
             {

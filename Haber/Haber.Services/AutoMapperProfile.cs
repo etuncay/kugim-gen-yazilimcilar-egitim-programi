@@ -24,6 +24,10 @@ namespace Haber.Services
                 .ReverseMap();
 
             CreateMap<KullaniciRequestViewModel, KullaniciEntity>().ReverseMap();
+
+            CreateMap<KategoriEntity, KategoriResponseViewModel>().ReverseMap();
+            CreateMap<KategoriRequestViewModel, KategoriEntity>().ReverseMap();
+
         }
     }
 }
