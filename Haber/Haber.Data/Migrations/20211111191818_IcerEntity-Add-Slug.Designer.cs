@@ -4,14 +4,16 @@ using Haber.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Haber.Data.Migrations
 {
     [DbContext(typeof(HaberDbContext))]
-    partial class HaberDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211111191818_IcerEntity-Add-Slug")]
+    partial class IcerEntityAddSlug
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,9 +207,6 @@ namespace Haber.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Aciklama")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("GuncellenmeTarihi")
                         .HasColumnType("datetime2");
 
@@ -246,17 +245,12 @@ namespace Haber.Data.Migrations
                     b.Property<int>("IcerikId")
                         .HasColumnType("int");
 
-                    b.Property<int>("KullaniciId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("OlusturulmaTarihi")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IcerikId");
-
-                    b.HasIndex("KullaniciId");
 
                     b.ToTable("Yorum");
                 });
@@ -321,15 +315,7 @@ namespace Haber.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Haber.Data.KullaniciEntity", "Kullanici")
-                        .WithMany()
-                        .HasForeignKey("KullaniciId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Icerik");
-
-                    b.Navigation("Kullanici");
                 });
 
             modelBuilder.Entity("Haber.Data.EtiketEntity", b =>

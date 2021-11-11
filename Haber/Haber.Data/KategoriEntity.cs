@@ -9,6 +9,7 @@ namespace Haber.Data
     public class KategoriEntity : BaseEntity
     {
         public string Ad { get; set; }
+        public string Slug { get; set; }
         public string Aciklama { get; set; }
 
         public virtual  ICollection<IcerikEntity> Icerikler { get; set; }

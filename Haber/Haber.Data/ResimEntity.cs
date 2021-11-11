@@ -12,6 +12,7 @@ namespace Haber.Data
         [ForeignKey("Icerik")]
         public int IcerikId { get; set; }
         public string ResimUrl { get; set; }
+        public string Aciklama { get; set; }
 
         public virtual IcerikEntity Icerik { get; set; }
     }

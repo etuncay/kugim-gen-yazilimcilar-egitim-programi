@@ -11,6 +11,7 @@ namespace Haber.Data
     public class IcerikEntity  :BaseEntity
     {
         public string Baslik { get; set; }
+        public string Slug { get; set; }
         public EnumIcerikTipi IcerikTipi { get; set; }
         [ForeignKey("Kategori")]
         public int KategoriId { get; set; }
@@ -19,7 +20,6 @@ namespace Haber.Data
         public string Govde { get; set; }
 
         public virtual KategoriEntity Kategori { get; set; }
-
         public virtual ICollection<ResimEntity> Resimler { get; set; }
         public virtual ICollection<YorumEntity> Yorumlar { get; set; }
         public virtual ICollection<IcerikEtiketEntity> IcerikEtiketler { get; set; }

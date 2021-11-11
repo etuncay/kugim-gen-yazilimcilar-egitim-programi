@@ -41,6 +41,10 @@ namespace Haber.WebApi
             services.AddSingleton<IPasswordHasher>(new PasswordHasher());
 
             services.AddScoped<IKullaniciService, KullaniciService>();
+            services.AddScoped<IKategoriService, KategoriService>();
+            services.AddScoped<IEtiketService, EtiketService>();
+            services.AddScoped<IIcerikService, IcerikService>();
+
 
             services.AddAutoMapper(c => c.AddProfile<AutoMapperProfile>(), typeof(Startup));
             services.AddDbContext<HaberDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));

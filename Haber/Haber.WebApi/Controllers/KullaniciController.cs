@@ -7,9 +7,7 @@ using System.Collections.Generic;
 
 namespace Haber.WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class KullaniciController : ControllerBase
+    public class KullaniciController : BaseController
     {
         private readonly IKullaniciService _kullaniciService;
         public KullaniciController(IKullaniciService kullaniciService)

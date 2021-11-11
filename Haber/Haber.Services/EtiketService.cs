@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace Haber.Services
 {
-    public class KategoriService : IKategoriService
+    public class EtiketService : IEtiketService
     {
         private readonly HaberDbContext _haberDbContext;
         private readonly IMapper _mapper;
 
-        public KategoriService(
+        public EtiketService(
             HaberDbContext haberDbContext,
             IMapper mapper)
         {
@@ -28,20 +28,21 @@ namespace Haber.Services
         }
 
 
-        public ResponseResultModel<int> Ekle(KategoriRequestViewModel model)
+        public ResponseResultModel<int> Ekle(EtiketRequestViewModel model)
         {
-            var validator = new KategoriRequestValidator();
+            var validator = new EtiketRequestValidator();
 
             var validate = validator.Validate(model);
 
             var result = new ResponseResultModel<int>();
 
+            var slug = new Slugify.SlugHelper();
+
             if (validate.IsValid)
             {
-                var slug = new Slugify.SlugHelper();
-
-                var entity = _mapper.Map<KategoriEntity>(model);
+                var entity = _mapper.Map<EtiketEntity>(model);
                 entity.Slug = slug.GenerateSlug(entity.Ad);
+
                 _haberDbContext.Add(entity);
                 result.SaveChange(_haberDbContext.SaveChanges());
                 result.Data = entity.Id;
@@ -55,15 +56,15 @@ namespace Haber.Services
             return result;
         }
 
-        public ResponseResultModel<List<KategoriResponseViewModel>> Listele()
+        public ResponseResultModel<List<EtiketResponseViewModel>> Listele()
         {
-            var result = new ResponseResultModel<List<KategoriResponseViewModel>>();
+            var result = new ResponseResultModel<List<EtiketResponseViewModel>>();
 
-            var queries = _haberDbContext.Kategori.ToList();
+            var queries = _haberDbContext.Etiket.ToList();
 
             if (queries.Any())
             {
-                result.Data = _mapper.Map<List<KategoriResponseViewModel>>(queries);
+                result.Data = _mapper.Map<List<EtiketResponseViewModel>>(queries);
                 result.Message = ResponseResultMessageType.KayitBulundu;
                 result.Type = EnumResponseResultType.Success;
                 result.TotalCount = result.Data.Count();
@@ -79,13 +80,13 @@ namespace Haber.Services
             return result;
         }
 
-        public ResponseResultModel<KategoriResponseViewModel> Getir(int id)
+        public ResponseResultModel<EtiketResponseViewModel> Getir(int id)
         {
-            var result = new ResponseResultModel<KategoriResponseViewModel>();
-            var query = _haberDbContext.Kategori.FirstOrDefault(q => q.Id == id);
+            var result = new ResponseResultModel<EtiketResponseViewModel>();
+            var query = _haberDbContext.Etiket.FirstOrDefault(q => q.Id == id);
             if (query != null)
             {
-                result.Data = _mapper.Map<KategoriResponseViewModel>(query);
+                result.Data = _mapper.Map<EtiketResponseViewModel>(query);
 
                 result.Message = ResponseResultMessageType.KayitBulundu;
                 result.Type = EnumResponseResultType.Success;
@@ -100,18 +101,16 @@ namespace Haber.Services
             return result;
         }
 
-        public ResponseResultModel Guncelle(int id, KategoriRequestViewModel model)
+        public ResponseResultModel Guncelle(int id, EtiketRequestViewModel model)
         {
             var result = new ResponseResultModel();
 
-            var query = _haberDbContext.Kategori.FirstOrDefault(q => q.Id == id);
+            var query = _haberDbContext.Etiket.FirstOrDefault(q => q.Id == id);
             if (query != null)
             {
                 var slug = new Slugify.SlugHelper();
                 query.Ad = model.Ad;
-                query.Slug = slug.GenerateSlug(query.Ad);
-                query.Aciklama = model.Aciklama;
-                query.GuncellenmeTarihi = DateTime.Now;
+                query.Slug = slug.GenerateSlug(model.Ad);
                 result.SaveChange(_haberDbContext.SaveChanges());
 
             }
@@ -130,10 +129,10 @@ namespace Haber.Services
         {
             var result = new ResponseResultModel();
 
-            var query = _haberDbContext.Kategori.FirstOrDefault(q => q.Id == id);
+            var query = _haberDbContext.Etiket.FirstOrDefault(q => q.Id == id);
             if (query != null)
             {
-                _haberDbContext.Kategori.Remove(query);
+                _haberDbContext.Etiket.Remove(query);
                 result.SaveChange(_haberDbContext.SaveChanges());
             }
             else

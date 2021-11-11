@@ -18,7 +18,7 @@ namespace Haber.Models.ViewModels
     public class ResponseResultModel
     {
         public Dictionary<string, string> Messages { get; set; } = new Dictionary<string, string>();
-        public string Message { get; set; }
+        public string Message { get; set; } 
         public EnumResponseResultType Type { get; set; }
         public string Error { get; set; }
 
@@ -47,5 +47,11 @@ namespace Haber.Models.ViewModels
         }
     }
 
+
+    public static  class ResponseResultMessageType
+    {
+        public static string KayitBulundu => "Kayıt bulundu.";
+        public static string KayitBulunamadi => "Kayıt bulunamadı";
+    }
 
 }
