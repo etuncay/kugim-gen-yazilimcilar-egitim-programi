@@ -140,8 +140,6 @@ namespace Haber.Services
             return result;
         }
 
-        
-
         public ResponseResultModel Sil(int id)
         {
             var result = new ResponseResultModel();
@@ -191,6 +189,28 @@ namespace Haber.Services
 
 
                 return result;
+        }
+
+        public ResponseResultModel YorumDurumDegistir(int yorumId, bool durum)
+        {
+            var result = new ResponseResultModel();
+
+            var query = _haberDbContext.Yorum.FirstOrDefault(q => q.Id == yorumId);
+
+            if (query != null)
+            {
+                query.Aktif = durum;
+
+                result.SaveChange(_haberDbContext.SaveChanges());
+            }
+            else
+            {
+                result.Message = ResponseResultMessageType.KayitBulunamadi;
+                result.Type = EnumResponseResultType.Error;
+            }
+
+
+            return result;
         }
     }
 }

@@ -17,5 +17,7 @@ namespace Haber.Core.Interfaces.Services
         ResponseResultModel Guncelle(int id, IcerikRequestViewModel model);
         ResponseResultModel Sil(int id);
         ResponseResultModel<int> YorumEkle(int id, int kullaniciId, string govde);
+        ResponseResultModel YorumDurumDegistir(int yorumId, bool durum);
+
     }
 }

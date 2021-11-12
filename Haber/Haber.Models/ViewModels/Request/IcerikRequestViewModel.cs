@@ -15,5 +15,6 @@ namespace Haber.Models.ViewModels.Request
         public string ResimUrl { get; set; }
         public string Ozet { get; set; }
         public string Govde { get; set; }
+
     }
 }
