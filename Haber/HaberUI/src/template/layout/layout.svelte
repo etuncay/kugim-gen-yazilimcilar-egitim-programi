@@ -17,9 +17,7 @@
 	<Navbar/>	
 	
 	<div class="page-wrapper">
-        
         <Route {currentRoute}  {params} />
-	  
 	  <!--footer-->
 	  <Footer/>
 	</div>

@@ -1,0 +1,38 @@
+<div class="text-center mb-4">
+    <a href="."><img src="./static/logo.svg" height="36" alt=""></a>
+  </div>
+  <form class="card card-md" action="." method="get" autocomplete="off">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Giriş yap veya kayıt ol</h2>
+      <div class="mb-3">
+        <label class="form-label">Ad</label>
+        <input type="text" class="form-control" placeholder="Adınızı giriniz giriniz">
+      </div><div class="mb-3">
+        <label class="form-label">Soyad</label>
+        <input type="text" class="form-control" placeholder="Soyadınızı giriniz.">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Kullanıcı adı</label>
+        <input type="email" class="form-control" placeholder="Kullanıcı adını giriniz">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Eposta Adresi</label>
+        <input type="email" class="form-control" placeholder="Eposta adresi giriniz">
+      </div>
+      <div class="mb-2">
+        <label class="form-label">
+          Şifre
+        </label>
+        <div class="input-group input-group-flat">
+          <input type="password" class="form-control"  placeholder="Password"  autocomplete="off">
+          
+        </div>
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary w-100">Kayıt ol</button>
+      </div>
+    </div>
+  </form>
+  <div class="text-center text-muted mt-3">
+    Hesabınız varsa <a href="./sign-in" tabindex="-1">Giriş yap</a>
+  </div>
