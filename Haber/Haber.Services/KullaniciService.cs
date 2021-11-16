@@ -38,7 +38,9 @@ namespace Haber.Services
 
             if (query != null)
             {
-                if(query.Sifre == sifre)
+                (bool Verified, bool NeedsUpgrade) = _passwordHasher.Check(query.Sifre, sifre);
+
+                if (Verified)
                 {
                     result.Data = _mapper.Map<KullaniciResponseViewModel>(query);
                         
@@ -141,7 +143,6 @@ namespace Haber.Services
             return result;
         }
 
-
         public ResponseResultModel Guncelle(int id, KullaniciRequestViewModel model)
         {
             var result = new ResponseResultModel();
@@ -178,8 +179,6 @@ namespace Haber.Services
 
             return result;
         }
-
-        
 
         public ResponseResultModel SifreGuncelle(int id, string yeniSifre)
         {
