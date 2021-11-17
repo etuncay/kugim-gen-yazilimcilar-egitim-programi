@@ -1,30 +1,44 @@
 <script>
-
   let kullaniciAdi='';
   let sifre='';
 
-  async function GirisYap(){
-  
-   let res =  await fetch('https://localhost:44364/api/Auth/SignIn',
-    {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify({kullaniciAdi:kullaniciAdi, sifre: sifre})
-    })
-    .then(function(res){ 
-      
-      return res.json()
-    })
-    .catch(function(res){ 
-      
-      //hata durumu 
-      console.error("message", res);
-    });
-    localStorage.setItem("Token", "Bearer " + res.data)
+
+
+ async  function GirisYap(){
+     let postData ={
+      kullaniciAdi: kullaniciAdi,
+      sifre: sifre,
+    };
+
+    let result = await fetch("https://localhost:44364/api/Auth/SignIn",
+      {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify(postData)
+      })
+      .then(function(res){ 
+        return res.json();
+       });
+
+      if(result.type=='Success'){
+        
+        localStorage.setItem('token', result.data.token)
+        localStorage.setItem('ad', result.data.ad)
+        localStorage.setItem('soyad', result.data.soyad)
+        localStorage.setItem('kullaniciAdi', result.data.kullaniciAdi)
+        localStorage.setItem('fotografUrl', result.data.fotografUrl)
+
+        location.href = '/';
+
+      }else{
+        alert(result.message);
+      }
+
   }
+
 </script>
 <div class="text-center mb-4">
     <a href="."><img src="./static/logo.svg" height="36" alt=""></a>

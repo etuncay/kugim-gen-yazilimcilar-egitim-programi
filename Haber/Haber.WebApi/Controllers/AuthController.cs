@@ -1,11 +1,11 @@
 ﻿using Haber.Core.Interfaces.Services;
 using Haber.Models.Dto;
 using Haber.Models.ViewModels.Request;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Haber.Models.ViewModels;
+using Haber.Models.ViewModels.Response;
 
 namespace Haber.WebApi.Controllers
 {
@@ -23,10 +23,10 @@ namespace Haber.WebApi.Controllers
             _config = config;
         }
         [HttpPost]
-        public ResponseResultModel<string> SignIn(KullaniciGirisRequestViewModel model)
+        public ResponseResultModel<TokenResponseResultViewModel> SignIn(KullaniciGirisRequestViewModel model)
         {
             var kullaniciResulte = _kullaniciService.Giris(model.KullaniciAdi, model.Sifre);
-            var result = new ResponseResultModel<string>();
+            var result = new ResponseResultModel<TokenResponseResultViewModel>();
             if (kullaniciResulte.Type == Models.Enums.EnumResponseResultType.Success)
             {
                 var kullanici = kullaniciResulte.Data;
@@ -40,8 +40,16 @@ namespace Haber.WebApi.Controllers
                    KullaniciAdi = kullanici.KullaniciAdi,
                    Yetkiler = kullanici.Yetkiler.Select(q=>q.ToString()).ToList()
                 };
+                var token ="Brearer " +_tokenService.BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), kullaniciToken);
 
-                result.Data = _tokenService.BuildToken(_config["Jwt:Key"].ToString(), _config["Jwt:Issuer"].ToString(), kullaniciToken);
+                result.Data = new TokenResponseResultViewModel()
+                {
+                    kullaniciAdi = kullanici.KullaniciAdi,
+                    Ad = kullanici.Ad,
+                    Soyad = kullanici.Soyad,
+                    FotografUrl = "https://www.kafkas.edu.tr/dosyalar/ashmyo/image/default-user.png",
+                    Token =token
+                };
 
                 result.Type = Models.Enums.EnumResponseResultType.Success;
                 result.Message = ResponseResultMessageType.KayitBulundu;
