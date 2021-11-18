@@ -1,6 +1,27 @@
 <script>
   import { Navigate } from 'svelte-router-spa';
 
+ async function Sil(id){
+    let onay = confirm("Silmek istediğinize eminmisiniz");
+    if(onay){
+     let result = await fetch("https://localhost:44364/api/Kategori/Sil?id="+id,
+        {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "Delete",
+        })
+        .then(function(res){ 
+            return res.json();
+        });
+
+        if(result.type=='Success'){
+            location.href = '/kategori/liste';
+        }
+    }
+  }   
+
   let items =  fetch("https://localhost:44364/api/Kategori/Listele",
       {
           headers: {
@@ -12,6 +33,8 @@
       .then(function(res){ 
         return res.json();
        });
+      
+  
 
 </script>
 <div class="container-xl">
@@ -39,7 +62,7 @@
           
           <li class="nav-item ms-auto">
             <Navigate to="kategori/ekle">Yeni Ekle</Navigate>
-
+           
           </li>
         </ul>
       </div>
@@ -50,6 +73,7 @@ class="table table-vcenter card-table">
             <tr>
               <th>#</th>
               <th>Ad</th>
+              <th class="w-1"></th>
               <th class="w-1"></th>
             </tr>
           </thead>
@@ -66,8 +90,12 @@ class="table table-vcenter card-table">
                 <tr>
                   <td>{i}</td>
                   <td>{item.ad}</td>
-                  <td>
+                  <td>  
                   <Navigate to="/kategori/duzenle/{item.id}">Düzenle</Navigate>
+
+                  </td>
+                  <td>
+                  <a href="#" on:click={() => Sil(item.id)}>Sil</a>
 
                   </td>
                 </tr>

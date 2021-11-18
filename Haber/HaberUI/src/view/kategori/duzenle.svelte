@@ -6,6 +6,7 @@
     let aciklama ='';
 
     (async () => {
+
         const rawResponse = await fetch('https://localhost:44364/api/Kategori/Getir?id='+id, {
             method: 'GET',
             headers: {
@@ -21,22 +22,23 @@
             }else{
                 alert(content.message)    
             }
+
         })();
    
 
-    async function Ekle(){
+    async function Duzenle(){
         let postData ={
             ad: ad,
             aciklama: aciklama,
             };
 
-        let result = await fetch("https://localhost:44364/api/Kategori/Ekle",
+        let result = await fetch("https://localhost:44364/api/Kategori/Guncelle?id="+id,
         {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            method: "POST",
+            method: "PUT",
             body: JSON.stringify(postData)
         })
         .then(function(res){ 
@@ -45,8 +47,6 @@
 
         if(result.type=='Success'){
             location.href = '/kategori/liste';
-        }else{
-
         }
     }
 
@@ -70,7 +70,7 @@
               <h3 class="card-title">Horizontal form</h3>
             </div>
             <div class="card-body">
-              <form on:submit|preventDefault={Ekle} >
+              <form on:submit|preventDefault={Duzenle} >
                 <div class="form-group mb-3 row">
                   <label class="form-label col-3 col-form-label">Ad</label>
                   <div class="col">
