@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,12 +38,37 @@ namespace Haber.WebApi.Controllers
         [HttpPost]
         public ResponseResultModel<int> Ekle(IcerikRequestViewModel model)
         {
-            return _icerikService.Ekle(model);
+
+            //if (model.Resim != null)
+            //{
+            //    model.ResimUrl = "file/" + Guid.NewGuid() + "-" + model.Resim.FileName;
+
+
+            //    using (Stream fileStream = new FileStream("wwwroot/" + model.ResimUrl, FileMode.Create))
+            //    {
+            //        model.Resim.CopyToAsync(fileStream);
+            //    }
+            //}
+            
+
+
+            return  _icerikService.Ekle(model);
         }
 
         [HttpPut]
         public ResponseResultModel Guncelle(int id, IcerikRequestViewModel model)
         {
+            //if (model.Resim != null)
+            //{
+            //    model.ResimUrl = "file/" + Guid.NewGuid() + "-" + model.Resim.FileName;
+
+
+            //    using (Stream fileStream = new FileStream("wwwroot/" + model.ResimUrl, FileMode.Create))
+            //    {
+            //        model.Resim.CopyTo(fileStream);
+            //    }
+            //}
+
             return _icerikService.Guncelle(id, model);
         }
 

@@ -14,6 +14,7 @@ import kategoriDuzenle from './view/kategori/duzenle.svelte'
 
 import icerikListe from './view/icerik/liste.svelte'
 import icerikEkle from './view/icerik/ekle.svelte'
+import icerikDuzenle from './view/icerik/duzenle.svelte'
 
 
 function userIsAdmin() {
@@ -65,6 +66,7 @@ const routes = [
         nestedRoutes: [
           { name: 'liste', component: icerikListe },
           { name: 'ekle', component: icerikEkle },
+          { name: 'duzenle', component: icerikDuzenle },
         ]
   }
 ]
