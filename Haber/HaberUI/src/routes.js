@@ -66,7 +66,7 @@ const routes = [
         nestedRoutes: [
           { name: 'liste', component: icerikListe },
           { name: 'ekle', component: icerikEkle },
-          { name: 'duzenle', component: icerikDuzenle },
+          { name: 'duzenle/:id', component: icerikDuzenle },
         ]
   }
 ]

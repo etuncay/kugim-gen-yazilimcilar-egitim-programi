@@ -35,7 +35,7 @@ namespace Haber.Services
             CreateMap<IcerikEntity, IcerikResponseViewModel>()
                 .ForMember(q=>q.IcerikTipi , opt => opt.MapFrom(src => new LabelValueModel() {
                     Label = src.IcerikTipi.ToString(),
-                    Value = src.IcerikTipi
+                    Value = src.IcerikTipi.GetHashCode()
                 }))
                 .ForMember(q=>q.Kategori , opt => opt.MapFrom(src => new LabelValueModel() {
                     Label = src.Kategori.Ad,
