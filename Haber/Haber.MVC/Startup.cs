@@ -1,5 +1,9 @@
+using Haber.Core.Interfaces.Services;
+using Haber.Data;
+using Haber.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +27,14 @@ namespace Haber.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IIcerikService, IcerikService>();
+            services.AddScoped<IKategoriService, KategoriService>();
+            services.AddScoped<IEtiketService, EtiketService>();
+
+            services.AddAutoMapper(c => c.AddProfile<AutoMapperProfile>(), typeof(Startup));
+            services.AddDbContext<HaberDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

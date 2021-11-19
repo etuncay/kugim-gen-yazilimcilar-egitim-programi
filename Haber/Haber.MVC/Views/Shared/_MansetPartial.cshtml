@@ -1,0 +1,32 @@
+﻿@model List<Haber.Models.ViewModels.Response.IcerikResponseViewModel>
+<div id="carousel-captions" st class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @{var activeClass = "active"; }
+        @foreach (var item in Model)
+        {
+
+
+            <div class="carousel-item @activeClass">
+                <img class="d-block w-100" alt="" src="https://halktv.com.tr/d/news/124387.jpg">
+                <div class="carousel-item-background d-none d-md-block"></div>
+                <div class="carousel-caption d-none d-md-block">
+                    <h3>@item.Baslik</h3>
+                    <p>@item.Ozet</p>
+                </div>
+            </div>@if (true)
+                {
+                    activeClass = "";
+                }
+        }
+
+
+    </div>
+    <a class="carousel-control-prev" href="#carousel-captions" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-captions" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>

@@ -57,16 +57,23 @@ namespace Haber.Services
             return result;
         }
 
-        public ResponseResultModel<List<IcerikResponseViewModel>> Listele()
+        public ResponseResultModel<List<IcerikResponseViewModel>> Listele(SayfalamaViewModel sayfalama)
         {
             var result = new ResponseResultModel<List<IcerikResponseViewModel>>();
 
-            var queries = _haberDbContext.Icerik
+            var query = _haberDbContext.Icerik
                 .Include(q=>q.Kategori)
                 .Include(q => q.Yorumlar).ThenInclude(q => q.Kullanici)
                 .Include(q => q.Resimler)
                 .Include(q => q.IcerikEtiketler).ThenInclude(q => q.Etiket)
-                .ToList();
+                .AsQueryable();
+
+            if (sayfalama.Sayfalama)
+            {
+                query = query.Skip(sayfalama.Atla).Take(sayfalama.Al).OrderByDescending(q => q.OlusturulmaTarihi);
+            }
+
+            var queries = query.ToList();
 
             if (queries.Any())
             {
@@ -212,5 +219,7 @@ namespace Haber.Services
 
             return result;
         }
+
+      
     }
 }

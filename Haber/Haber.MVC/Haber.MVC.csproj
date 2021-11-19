@@ -4,4 +4,16 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Haber.Data\Haber.Data.csproj" />
+    <ProjectReference Include="..\Haber.Models\Haber.Models.csproj" />
+    <ProjectReference Include="..\Haber.Services\Haber.Services.csproj" />
+  </ItemGroup>
+
 </Project>

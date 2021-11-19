@@ -26,7 +26,12 @@ namespace Haber.WebApi.Controllers
         [HttpGet]
         public ResponseResultModel<List<IcerikResponseViewModel>> Listele()
         {
-            return _icerikService.Listele();
+            var sayfalama = new SayfalamaViewModel()
+            {
+                Sayfalama = false
+            };
+
+            return _icerikService.Listele(sayfalama);
         }
 
         [HttpGet]
