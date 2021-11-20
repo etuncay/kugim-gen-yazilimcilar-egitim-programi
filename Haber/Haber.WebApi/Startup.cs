@@ -49,6 +49,8 @@ namespace Haber.WebApi
             services.AddScoped<IEtiketService, EtiketService>();
             services.AddScoped<IIcerikService, IcerikService>();
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ICacheService, CacheService>();
+
 
             services.AddCors(o => o.AddPolicy(ApiCorsPolicy, builder =>
             {
@@ -92,7 +94,7 @@ namespace Haber.WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Haber.WebApi v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

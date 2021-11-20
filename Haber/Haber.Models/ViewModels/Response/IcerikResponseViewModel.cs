@@ -17,6 +17,7 @@ namespace Haber.Models.ViewModels.Response
         public string ResimUrl { get; set; }
         public string Ozet { get; set; }
         public string Govde { get; set; }
+        public DateTime Tarih { get; set; }
 
         public List<YorumResponseViewModel> Yorumlar { get; set; }
         public List<ResimResponseViewModel> Resimler { get; set; }

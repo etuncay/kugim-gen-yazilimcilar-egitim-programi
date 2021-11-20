@@ -15,6 +15,7 @@ namespace Haber.Data
         public DbSet<EtiketEntity> Etiket { get; set; }
         public DbSet<IcerikEntity> Icerik { get; set; }
         public DbSet<IcerikEtiketEntity> IcerikEtiket { get; set; }
+        public DbSet<CacheEntity> Cache { get; set; }
 
     }
 }

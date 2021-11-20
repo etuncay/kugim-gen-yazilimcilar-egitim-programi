@@ -28,13 +28,6 @@ namespace Haber.MVC
         {
             services.AddControllersWithViews();
 
-            services.AddScoped<IIcerikService, IcerikService>();
-            services.AddScoped<IKategoriService, KategoriService>();
-            services.AddScoped<IEtiketService, EtiketService>();
-
-            services.AddAutoMapper(c => c.AddProfile<AutoMapperProfile>(), typeof(Startup));
-            services.AddDbContext<HaberDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

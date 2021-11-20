@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Home Page";
+   
 }
 
 <div class="row">
@@ -11,6 +12,32 @@
             <div class="card-body">
                 @await Html.PartialAsync("_MansetPartial", Model.MansetHaberleri)
             </div>
+        </div>
+        <div class="row row-cards">
+            @foreach (var item in Model.GovdeHaberleri)
+            {
+
+
+
+            <div class="col-md-6 col-xl-4">
+                <div class="card">
+                    <div class="card-img-top">
+                        <a href="/Haber/@item.Id/@item.Slug" target="_blank"><img src="@item.ResimUrl" /></a>
+
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">
+                            <a href="/Haber/@item.Id/@item.Slug" target="_blank">
+                                @item.Baslik.Substring(0, 75)
+                            </a>
+                        </h3>
+                        <p>
+                            @item.Ozet.Replace("<[^>]*>", "").Substring(0, 100)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
         </div>
     </div>
 

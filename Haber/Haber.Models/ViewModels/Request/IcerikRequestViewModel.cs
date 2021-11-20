@@ -13,10 +13,10 @@ namespace Haber.Models.ViewModels.Request
         public string Baslik { get; set; }
         public EnumIcerikTipi IcerikTipi { get; set; }
         public int KategoriId { get; set; }
-        //public IFormFile Resim { get; set; }
         public string ResimUrl { get; set; }
         public string Ozet { get; set; }
         public string Govde { get; set; }
+        public DateTime Tarih { get; set; } 
 
     }
 }

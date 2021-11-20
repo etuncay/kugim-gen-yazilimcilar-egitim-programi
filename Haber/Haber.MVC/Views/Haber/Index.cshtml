@@ -1,8 +1,20 @@
-﻿
+﻿@model Haber.Models.ViewModels.Response.IcerikResponseViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
+<div class="row row-cards">
+    <div class="col-md-9">
+        <h1>@Model.Baslik</h1>
+
+        <img class="d-block w-100" alt="@Model.Baslik" src="@Model.ResimUrl">
+        <span>
+            @Html.Raw(Model.Govde)
+        </span>
+    </div>
+    <div class="col-md-3">
+        sidebar
+    </div>
+</div>

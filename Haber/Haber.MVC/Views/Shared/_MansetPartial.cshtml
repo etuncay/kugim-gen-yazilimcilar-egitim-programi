@@ -7,7 +7,9 @@
 
 
             <div class="carousel-item @activeClass">
-                <img class="d-block w-100" alt="" src="https://halktv.com.tr/d/news/124387.jpg">
+                <a href="/Haber/@item.Id/@item.Slug" target="_blank">
+                    <img class="d-block w-100" alt="" src="@item.ResimUrl">
+                </a>
                 <div class="carousel-item-background d-none d-md-block"></div>
                 <div class="carousel-caption d-none d-md-block">
                     <h3>@item.Baslik</h3>

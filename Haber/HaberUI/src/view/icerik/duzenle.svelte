@@ -12,6 +12,7 @@
     let ozet ='';
     let govde ='';
     let kategoriler = [];  
+    let tarih ='';
 
     (async () => {
 
@@ -43,7 +44,7 @@
                 resimUrl =icerikData.resimUrl;
                 ozet = icerikData.ozet;
                 govde =icerikData.govde;
-                console.log(icerikData.icerikTipi.value)
+                tarih = icerikData.tarih;
                 
             }else{
                 alert(icerikContent.message)    
@@ -55,12 +56,13 @@
 
 async function Duzenle(){
         let postData ={
-                baslik :icerikData.baslik,
-                icerikTipi :icerikData.icerikTipi,
-                kategoriId :icerikData.kategoriId,
-                resimUrl :icerikData.resimUrl,
-                ozet :icerikData.ozet,
-                govde :icerikData.govde
+                baslik :baslik,
+                icerikTipi :icerikTipi,
+                kategoriId :kategoriId,
+                resimUrl :resimUrl,
+                ozet :ozet,
+                govde :govde,
+                tarih: tarih
             };
 
         let result = await fetch("https://localhost:44364/api/Icerik/Guncelle?id="+id,
@@ -79,6 +81,30 @@ async function Duzenle(){
         if(result.type=='Success'){
             location.href = '/icerik/liste';
         }
+    }
+
+    async function ResimYukle(){
+      
+      let postData = new FormData();
+      
+      postData.append('file', resim.files[0])
+
+
+      let result = await fetch("https://localhost:44364/api/File/Yukle",
+      {
+         
+          method: "POST",
+          body: postData
+      })
+      .then(function(res){ 
+        return res.json();
+      });
+
+      if(result.type=='Success'){
+        resimUrl = result.data;
+      }else{
+        alert(result.message)
+      }
     }
 
 </script>
@@ -110,16 +136,23 @@ async function Duzenle(){
                   <label class="form-label col-3 col-form-label">Başlık</label>
                   <div class="col">
                     <input type="text" class="form-control" bind:value={baslik} placeholder="içerik için uygun bir başlık giriniz">
-                    <small class="form-hint">başlık giriniz</small>
+                  </div>
+                </div>
+                <div class="form-group mb-3 row">
+                  <label class="form-label col-3 col-form-label">Tarih</label>
+                  <div class="col">
+                    <input type="datetime-local" class="form-control" bind:value={tarih} placeholder="Tarih bilgisini giriniz">
                   </div>
                 </div>
                 <div class="form-group mb-3 row">
                     <label class="form-label col-3 col-form-label">Resim</label>
                     
                     <div class="col">
-                      <input type="file" class="form-control" bind:files={resim}>
+                      <input type="file" class="form-control" on:change={ResimYukle} bind:this={resim}>
                       <small class="form-hint">resim seçiniz</small>
                     </div>
+                    <img src={resimUrl} style="width: 250px;">
+
                   </div>
                   
                 <div class="form-group mb-3 row">

@@ -9,5 +9,6 @@ namespace Haber.MVC.Models
     public class HomeHaberViewModel
     {
         public List<IcerikResponseViewModel> MansetHaberleri { get; set; }
+        public List<IcerikResponseViewModel> GovdeHaberleri { get; set; }
     }
 }

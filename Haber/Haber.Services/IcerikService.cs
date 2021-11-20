@@ -70,7 +70,7 @@ namespace Haber.Services
 
             if (sayfalama.Sayfalama)
             {
-                query = query.Skip(sayfalama.Atla).Take(sayfalama.Al).OrderByDescending(q => q.OlusturulmaTarihi);
+                query = query.Skip(sayfalama.Atla).Take(sayfalama.Al).OrderByDescending(q => q.Tarih);
             }
 
             var queries = query.ToList();
@@ -133,6 +133,7 @@ namespace Haber.Services
                 query.Ozet= model.Ozet;
                 query.ResimUrl= model.ResimUrl;
                 query.Govde= model.Govde;
+                query.Tarih = model.Tarih;
 
                 query.Slug = slug.GenerateSlug(model.Baslik);
                 result.SaveChange(_haberDbContext.SaveChanges());

@@ -76,6 +76,7 @@
                 <th>Başlık</th>
                 <th>İçerik Tipi</th>
                 <th>Kategori</th>
+                <th width="200px">Tarih</th>
                 <th class="w-1"></th>
                 <th class="w-1"></th>
               </tr>
@@ -91,10 +92,11 @@
                 {#each value.data as item,  i}
                   <tr>
                     <td>{i+1}</td>
-                    <td><img src={item.resimUrl} ></td>
+                    <td><img style="height: 50px;" src={item.resimUrl} ></td>
                     <td>{item.baslik}</td>
                     <td>{item.icerikTipi.label}</td>
                     <td>{item.kategori.label}</td>
+                    <td>{item.tarih}</td>
                     <td>  
                     <Navigate to="/icerik/duzenle/{item.id}">Düzenle</Navigate>
   

@@ -18,6 +18,7 @@ namespace Haber.Data
         public string ResimUrl { get; set; }
         public string Ozet { get; set; }
         public string Govde { get; set; }
+        public DateTime Tarih { get; set; } = DateTime.Now;
 
         public virtual KategoriEntity Kategori { get; set; }
         public virtual ICollection<ResimEntity> Resimler { get; set; }

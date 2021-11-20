@@ -15,20 +15,24 @@ namespace Haber.WebApi.Controllers
     public class IcerikController : BaseController
     {
         private readonly IIcerikService _icerikService;
-
+        private readonly ICacheService _cacheService;
         public IcerikController(
-            IIcerikService icerikService
+            IIcerikService icerikService,
+            ICacheService cacheService
             )
         {
             _icerikService = icerikService;
+            _cacheService = cacheService;
         }
 
         [HttpGet]
-        public ResponseResultModel<List<IcerikResponseViewModel>> Listele()
+        public ResponseResultModel<List<IcerikResponseViewModel>> Listele(int al, int atla, bool sayfala=false)
         {
             var sayfalama = new SayfalamaViewModel()
             {
-                Sayfalama = false
+                Al = al,
+                Atla = atla,
+                Sayfalama = sayfala
             };
 
             return _icerikService.Listele(sayfalama);
@@ -37,7 +41,18 @@ namespace Haber.WebApi.Controllers
         [HttpGet]
         public ResponseResultModel<IcerikResponseViewModel> Getir(int id)
         {
-            return _icerikService.Getir(id);
+            var cacheKey = "icerik-"+id;
+
+            if (_cacheService.Has(cacheKey))
+            {
+                return _cacheService.Get<ResponseResultModel<IcerikResponseViewModel>>(cacheKey);
+            }
+            else
+            {
+                var data = _icerikService.Getir(id);
+                _cacheService.Add(cacheKey,data);
+                return data;
+            }
         }
 
         [HttpPost]

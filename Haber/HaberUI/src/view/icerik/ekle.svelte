@@ -61,6 +61,30 @@
       }
     }
 
+    async function ResimYukle(){
+      
+      let postData = new FormData();
+      
+      postData.append('file', resim.files[0])
+
+
+      let result = await fetch("https://localhost:44364/api/File/Yukle",
+      {
+         
+          method: "POST",
+          body: postData
+      })
+      .then(function(res){ 
+        return res.json();
+      });
+
+      if(result.type=='Success'){
+        resimUrl = result.data;
+      }else{
+        alert(result.message)
+      }
+    }
+
 </script>
 <svelte:head>
 	<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -97,9 +121,10 @@
                     <label class="form-label col-3 col-form-label">Resim</label>
                     
                     <div class="col">
-                      <input type="file" class="form-control" bind:files={resim}>
+                      <input type="file" class="form-control" on:change={ResimYukle} bind:this={resim}>
                       <small class="form-hint">resim seçiniz</small>
                     </div>
+                    <img src={resimUrl} style="width: 250px;">
                   </div>
                   
                 <div class="form-group mb-3 row">
