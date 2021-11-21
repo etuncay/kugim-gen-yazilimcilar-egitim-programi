@@ -10,7 +10,9 @@
     <div class="col-9">
         <div class="row">
             <div class="card-body">
-                @await Html.PartialAsync("_MansetPartial", Model.MansetHaberleri)
+                @*@await Html.PartialAsync("_MansetPartial", Model.MansetHaberleri)*@
+                @(await Component.InvokeAsync("MansetHaber", new { al=5}))
+
             </div>
         </div>
         <div class="row row-cards">
@@ -43,6 +45,9 @@
 
     <div class="col-3">
         <!--Sidebar-->
+        @(await Component.InvokeAsync("KategoriHaber", new { kategoriId = 4 , al=5}))
+        @(await Component.InvokeAsync("KategoriHaber", new { kategoriId = 6 , al=5}))
+        @(await Component.InvokeAsync("KategoriHaber", new { kategoriId = 9 , al=5}))
     </div>
 
 </div>

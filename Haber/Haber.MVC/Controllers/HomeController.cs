@@ -27,15 +27,15 @@ namespace Haber.MVC.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var mansetrequest = new RestRequest($"Icerik/Listele?al={5}&atla=0&sayfala=true");
-            var mansetHaberleri =await _restClient.GetAsync<ResponseResultModel<List<IcerikResponseViewModel>>>(mansetrequest);
+            //var mansetrequest = new RestRequest($"Icerik/Listele?al={5}&atla=0&sayfala=true");
+            //var mansetHaberleri =await _restClient.GetAsync<ResponseResultModel<List<IcerikResponseViewModel>>>(mansetrequest);
 
             var govderequest = new RestRequest($"Icerik/Listele?al={12}&atla=5&sayfala=true");
 
             var govdeHaberleri = await _restClient.GetAsync<ResponseResultModel<List<IcerikResponseViewModel>>>(govderequest);
 
             var result = new HomeHaberViewModel() {
-                MansetHaberleri = mansetHaberleri.Data,
+            //    MansetHaberleri = mansetHaberleri.Data,
                 GovdeHaberleri = govdeHaberleri.Data
             };
 

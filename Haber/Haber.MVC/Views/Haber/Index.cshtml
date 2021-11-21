@@ -15,6 +15,6 @@
         </span>
     </div>
     <div class="col-md-3">
-        sidebar
+        @(await Component.InvokeAsync("KategoriHaber", new { kategoriId = int.Parse(Model.Kategori.Value.ToString()) , al=5}))
     </div>
 </div>
