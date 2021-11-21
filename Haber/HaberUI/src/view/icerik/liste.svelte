@@ -1,10 +1,11 @@
 <script>
     import { Navigate } from 'svelte-router-spa';
+    import { apiBaseUrl } from '../../const';
   
    async function Sil(id){
       let onay = confirm("Silmek istediğinize eminmisiniz");
       if(onay){
-       let result = await fetch("https://localhost:44364/api/Icerik/Sil?id="+id,
+       let result = await fetch(apiBaseUrl.concat('Icerik/Sil?id='+id),
           {
               headers: {
                   'Accept': 'application/json',
@@ -22,7 +23,7 @@
       }
     }   
   
-    let items =  fetch("https://localhost:44364/api/Icerik/Listele",
+    let items =  fetch(apiBaseUrl.concat('Icerik/Listele?al=10&atla=0&sayfala=true'),
         {
             headers: {
               'Accept': 'application/json',
@@ -79,6 +80,7 @@
                 <th width="200px">Tarih</th>
                 <th class="w-1"></th>
                 <th class="w-1"></th>
+                <th class="w-1"></th>
               </tr>
             </thead>
             <tbody>
@@ -99,8 +101,10 @@
                     <td>{item.tarih}</td>
                     <td>  
                     <Navigate to="/icerik/duzenle/{item.id}">Düzenle</Navigate>
-  
                     </td>
+                    <td>  
+                      <Navigate to="/icerik/fotograflar/{item.id}">Fotograflar</Navigate>
+                      </td>
                     <td>
                     <a href="#" on:click={() => Sil(item.id)}>Sil</a>
   

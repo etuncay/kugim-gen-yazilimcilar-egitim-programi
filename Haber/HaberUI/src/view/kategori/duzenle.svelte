@@ -1,13 +1,15 @@
 <script>
     import { Route } from 'svelte-router-spa'
     export let currentRoute   
+    import { apiBaseUrl } from '../../const';
+
     let id= currentRoute.namedParams.id;
     let ad ='';
     let aciklama ='';
 
     (async () => {
 
-        const rawResponse = await fetch('https://localhost:44364/api/Kategori/Getir?id='+id, {
+        const rawResponse = await fetch(apiBaseUrl.concat('Kategori/Getir?id='+id), {
             method: 'GET',
             headers: {
             'Accept': 'application/json',
@@ -32,7 +34,7 @@
             aciklama: aciklama,
             };
 
-        let result = await fetch("https://localhost:44364/api/Kategori/Guncelle?id="+id,
+        let result = await fetch(apiBaseUrl.concat("Kategori/Guncelle?id="+id),
         {
             headers: {
                 'Accept': 'application/json',

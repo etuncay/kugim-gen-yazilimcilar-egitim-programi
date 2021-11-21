@@ -1,6 +1,7 @@
 <script>
     import { quill } from "svelte-quill";
     import { Route } from 'svelte-router-spa'
+    import { apiBaseUrl } from '../../const';
     export let currentRoute   
      const options = { }
     let id= currentRoute.namedParams.id;
@@ -16,7 +17,7 @@
 
     (async () => {
 
-    const rawResponse = await fetch('https://localhost:44364/api/Kategori/Listele', {
+    const rawResponse = await fetch(apiBaseUrl.concat('Kategori/Listele'), {
         method: 'GET',
         headers: {
         'Accept': 'application/json',
@@ -27,7 +28,7 @@
 
     kategoriler = content.data;
 
-    const icerikResponse = await fetch('https://localhost:44364/api/Icerik/Getir?id='+id, {
+    const icerikResponse = await fetch(apiBaseUrl.concat('Icerik/Getir?id='+id), {
             method: 'GET',
             headers: {
             'Accept': 'application/json',
@@ -65,7 +66,7 @@ async function Duzenle(){
                 tarih: tarih
             };
 
-        let result = await fetch("https://localhost:44364/api/Icerik/Guncelle?id="+id,
+        let result = await fetch(apiBaseUrl.concat('Icerik/Guncelle?id='+id),
         {
             headers: {
                 'Accept': 'application/json',
@@ -90,7 +91,7 @@ async function Duzenle(){
       postData.append('file', resim.files[0])
 
 
-      let result = await fetch("https://localhost:44364/api/File/Yukle",
+      let result = await fetch(apiBaseUrl.concat('File/Yukle'),
       {
          
           method: "POST",

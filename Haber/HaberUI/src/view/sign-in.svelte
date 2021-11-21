@@ -1,4 +1,6 @@
 <script>
+    import { apiBaseUrl } from '../const';
+  
   let kullaniciAdi='';
   let sifre='';
 
@@ -10,7 +12,7 @@
       sifre: sifre,
     };
 
-    let result = await fetch("https://localhost:44364/api/Auth/SignIn",
+    let result = await fetch(apiBaseUrl.concat('Auth/SignIn'),
       {
           headers: {
             'Accept': 'application/json',

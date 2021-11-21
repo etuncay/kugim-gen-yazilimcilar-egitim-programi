@@ -1,5 +1,7 @@
 <script>
      import { quill } from "svelte-quill";
+    import { apiBaseUrl } from '../../const';
+
      const options = { }
 
     let baslik ='';
@@ -13,7 +15,7 @@
     
     (async () => {
 
-    const rawResponse = await fetch('https://localhost:44364/api/Kategori/Listele', {
+    const rawResponse = await fetch(apiBaseUrl.concat('Kategori/Listele'), {
         method: 'GET',
         headers: {
         'Accept': 'application/json',
@@ -41,7 +43,7 @@
                 
             };
 
-        let result = await fetch("https://localhost:44364/api/Icerik/Ekle",
+        let result = await fetch(apiBaseUrl.concat('Icerik/Ekle'),
       {
           headers: {
             'Accept': 'application/json',
@@ -68,7 +70,7 @@
       postData.append('file', resim.files[0])
 
 
-      let result = await fetch("https://localhost:44364/api/File/Yukle",
+      let result = await fetch(apiBaseUrl.concat('File/Yukle'),
       {
          
           method: "POST",

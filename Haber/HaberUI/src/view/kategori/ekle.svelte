@@ -1,4 +1,6 @@
 <script>
+    import { apiBaseUrl } from '../../const';
+
     let ad ='';
     let aciklama ='';
     
@@ -8,7 +10,7 @@
             aciklama: aciklama,
             };
 
-        let result = await fetch("https://localhost:44364/api/Kategori/Ekle",
+        let result = await fetch(apiBaseUrl.concat('Kategori/Ekle'),
       {
           headers: {
             'Accept': 'application/json',

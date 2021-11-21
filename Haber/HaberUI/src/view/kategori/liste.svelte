@@ -1,10 +1,11 @@
 <script>
   import { Navigate } from 'svelte-router-spa';
+  import { apiBaseUrl } from '../../const';
 
  async function Sil(id){
     let onay = confirm("Silmek istediğinize eminmisiniz");
     if(onay){
-     let result = await fetch("https://localhost:44364/api/Kategori/Sil?id="+id,
+     let result = await fetch(apiBaseUrl.concat('Kategori/Sil?id='+id),
         {
             headers: {
                 'Accept': 'application/json',
@@ -22,7 +23,7 @@
     }
   }   
 
-  let items =  fetch("https://localhost:44364/api/Kategori/Listele",
+  let items =  fetch(apiBaseUrl.concat('Kategori/Listele'),
       {
           headers: {
             'Accept': 'application/json',
