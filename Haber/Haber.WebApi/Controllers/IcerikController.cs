@@ -106,5 +106,7 @@ namespace Haber.WebApi.Controllers
         {
             return _icerikService.Sil(id);
         }
+
+       
     }
 }

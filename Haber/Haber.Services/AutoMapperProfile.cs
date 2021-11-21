@@ -70,6 +70,9 @@ namespace Haber.Services
                 .ReverseMap();
             CreateMap<IcerikRequestViewModel, IcerikEntity>().ReverseMap();
 
+            CreateMap<ResimRequestViewModel, ResimEntity>().ReverseMap();
+            CreateMap<ResimEntity, ResimResponseViewModel>().ReverseMap();
+
 
 
         }

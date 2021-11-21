@@ -13,6 +13,8 @@
         <span>
             @Html.Raw(Model.Govde)
         </span>
+        @(await Component.InvokeAsync("HaberFotograflar", new { icerikId=Model.Id}))
+
     </div>
     <div class="col-md-3">
         @(await Component.InvokeAsync("KategoriHaber", new { kategoriId = int.Parse(Model.Kategori.Value.ToString()) , al=5}))

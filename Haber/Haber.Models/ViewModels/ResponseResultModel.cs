@@ -52,6 +52,10 @@ namespace Haber.Models.ViewModels
     {
         public static string KayitBulundu => "Kayıt bulundu.";
         public static string KayitBulunamadi => "Kayıt bulunamadı";
+        public static string KadedilirkenHata => "Kayıt yapılırken hata çıkmıştır.";
+        public static string BasariliIslem=> "Kayıt yapılırken hata çıkmıştır.";
+        public static string BasarisizIslem => "Kayıt yapılırken hata çıkmıştır.";
+
     }
 
 }

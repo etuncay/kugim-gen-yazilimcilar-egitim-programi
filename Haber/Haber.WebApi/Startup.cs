@@ -50,6 +50,7 @@ namespace Haber.WebApi
             services.AddScoped<IIcerikService, IcerikService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICacheService, CacheService>();
+            services.AddScoped<IResimService, ResimService>();
 
 
             services.AddCors(o => o.AddPolicy(ApiCorsPolicy, builder =>
