@@ -221,6 +221,48 @@ namespace Haber.Services
             return result;
         }
 
-      
+        public ResponseResultModel<List<IcerikResponseViewModel>> Filtrele(IcerikFitreleRequestViewModel filtreModel)
+        {
+            var result = new ResponseResultModel<List<IcerikResponseViewModel>>();
+
+
+            var query = _haberDbContext.Icerik
+               .Include(q => q.Kategori)
+               .Include(q => q.Yorumlar).ThenInclude(q => q.Kullanici)
+               .Include(q => q.Resimler)
+               .Include(q => q.IcerikEtiketler).ThenInclude(q => q.Etiket)
+               .AsQueryable();
+
+            if (filtreModel.KategoriId != null)
+            {
+                query = query.Where(q => q.KategoriId == filtreModel.KategoriId);
+            }
+
+            if (!string.IsNullOrEmpty(filtreModel.AraString))
+            {
+                query = query.Where(q => q.Baslik.Contains(filtreModel.AraString) || q.Govde.Contains(filtreModel.AraString));
+            }
+
+            if (filtreModel.Sayfalama.Sayfalama == true)
+            {
+                query = query.Skip(filtreModel.Sayfalama.Atla).Take(filtreModel.Sayfalama.Al);
+            }
+
+            if (query.Any())
+            {
+                query = query.OrderByDescending(q => q.Tarih);
+
+                result.Data = _mapper.Map<List<IcerikResponseViewModel>>(query);
+                result.Message = ResponseResultMessageType.KayitBulundu;
+                result.Type = EnumResponseResultType.Success;
+            }
+            else
+            {
+                result.Message = ResponseResultMessageType.KayitBulunamadi;
+                result.Type = EnumResponseResultType.Info;
+            }
+
+            return result;
+        }
     }
 }

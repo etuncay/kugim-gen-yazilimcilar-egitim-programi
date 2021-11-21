@@ -11,12 +11,13 @@ namespace Haber.Services
 {
     public class CacheService : ICacheService
     {
-        public long CacheOffsetTime => 10000000000;
+        public long CacheOffsetTime => 120;
         private readonly HaberDbContext _haberDbContext;
-
+        private long nowTicks=0;
         public CacheService(HaberDbContext haberDbContext)
         {
             _haberDbContext = haberDbContext;
+            nowTicks = DateTime.Now.Ticks;
         }
 
         public bool Add(string key, object obj)
@@ -30,7 +31,7 @@ namespace Haber.Services
             {
                 Key = key,
                 Value = JsonConvert.SerializeObject(obj),
-                ExpirationTime = DateTime.Now.Ticks+ CacheOffsetTime,
+                ExpirationTime = DateTime.Now.AddMinutes(CacheOffsetTime).Ticks,
                 OlusturulmaTarihi = DateTime.Now
             };
             _haberDbContext.Add(entity);
@@ -39,32 +40,43 @@ namespace Haber.Services
 
         public bool AddOrUpdate(string key, object obj)
         {
-            var query = _haberDbContext.Cache.FirstOrDefault(q => q.Key == key && q.ExpirationTime > DateTime.Now.Ticks);
+            var query = _haberDbContext.Cache.FirstOrDefault(q => q.Key == key);
 
             if (query != null )
             {
 
-                query.Value = JsonConvert.SerializeObject(obj);
-                query.ExpirationTime = DateTime.Now.Ticks + CacheOffsetTime;
+                if(query.ExpirationTime> nowTicks)
+                {
+                    query.Value = JsonConvert.SerializeObject(obj);
+                    query.ExpirationTime = DateTime.Now.AddMinutes(CacheOffsetTime).Ticks;
+                    return _haberDbContext.SaveChanges() > 0 ? true : false;
+                }
+                else
+                {
+                    Remove(key);
+                }
+            }
 
-                return _haberDbContext.SaveChanges() > 0 ? true : false;
-            }
-            else
-            {
-                Remove(key);
-                return Add(key, obj);
-            }
+            return Add(key, obj);
+
         }
 
         public T Get<T>(string key) where T : class
         {
-            var nowTicks =  DateTime.Now.Ticks;
 
-            var query = _haberDbContext.Cache.FirstOrDefault(q => q.Key == key && q.ExpirationTime > nowTicks);
+            var query = _haberDbContext.Cache.FirstOrDefault(q => q.Key == key);
 
             if (query != null)
             {
-                return JsonConvert.DeserializeObject<T>(query.Value);
+                if(query.ExpirationTime> nowTicks)
+                {
+                    return JsonConvert.DeserializeObject<T>(query.Value);
+                }
+                else
+                {
+                    Remove(key);
+                }
+
             }
 
             return default;
@@ -72,22 +84,25 @@ namespace Haber.Services
 
         public bool Has(string key)
         {
-            var nowTicks = DateTime.Now.Ticks;
 
 
             var query = _haberDbContext.Cache.FirstOrDefault(q => q.Key == key);
 
 
 
-            if (query!=null && query.ExpirationTime > nowTicks)
+            if (query!=null)
             {
-                return true;
+                if(query.ExpirationTime > nowTicks)
+                {
+                    return true;
+
+                }
+                else {
+                    Remove(key);
+                }
 
             }
-            else
-            {
-                return false;
-            }
+            return false;
 
         }
 

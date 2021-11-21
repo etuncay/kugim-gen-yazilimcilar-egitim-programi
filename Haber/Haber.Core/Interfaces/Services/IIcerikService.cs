@@ -12,6 +12,7 @@ namespace Haber.Core.Interfaces.Services
     public interface IIcerikService
     {
         ResponseResultModel<List<IcerikResponseViewModel>> Listele(SayfalamaViewModel sayfalama);
+        ResponseResultModel<List<IcerikResponseViewModel>> Filtrele(IcerikFitreleRequestViewModel filtreModel);
         ResponseResultModel<IcerikResponseViewModel> Getir(int id);
         ResponseResultModel<int> Ekle(IcerikRequestViewModel model);
         ResponseResultModel Guncelle(int id, IcerikRequestViewModel model);

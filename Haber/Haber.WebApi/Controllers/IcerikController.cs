@@ -39,6 +39,15 @@ namespace Haber.WebApi.Controllers
         }
 
         [HttpGet]
+        public ResponseResultModel<List<IcerikResponseViewModel>> Filtrele([FromQuery] IcerikFitreleRequestViewModel filterModel)
+        {
+            
+            return _icerikService.Filtrele(filterModel);
+        }
+
+
+
+        [HttpGet]
         public ResponseResultModel<IcerikResponseViewModel> Getir(int id)
         {
             var cacheKey = "icerik-"+id;

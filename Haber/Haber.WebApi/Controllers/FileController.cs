@@ -16,7 +16,7 @@ namespace Haber.WebApi.Controllers
         [HttpPost("Yukle")]
         public ResponseResultModel<string> Yukle(IFormFile file)
         {
-            var baseUrl = "https://localhost:44364/";
+            var baseUrl = "https://localhost:42939/";
 
             var result = new ResponseResultModel<string>();
             result.Type = Models.Enums.EnumResponseResultType.Error;
