@@ -1,0 +1,87 @@
+﻿@model Haber.Models.ViewModels.ResponseResultModel<List<Haber.Models.ViewModels.Response.IcerikResponseViewModel>>
+
+@{
+    ViewData["Title"] = "Listele";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var sayfaSayisi = (Model.TotalCount / 6) + (Model.TotalCount % 6 > 0 ? 1 : 0);
+
+}
+
+<h1>Listele</h1>
+
+
+@if (Model != null && Model.Data != null)
+{
+    <div class="row row-cards">
+        <div class="col-md-12">
+            <div class="row row-cards">
+                @foreach (var item in Model.Data)
+                {
+
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card">
+                            <div class="card-img-top">
+                                <a href="/Galeri/@item.Id/@item.Slug/1" target="_blank"><img src="@item.ResimUrl" /></a>
+
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    <a href="/Galeri/@item.Id/@item.Slug/1" target="_blank">
+                                        @item.Baslik.Substring(0, 75)
+                                    </a>
+                                </h3>
+                                <p>
+                                    @item.Ozet.Replace("<[^>]*>", "").Substring(0, 100)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <ul class="pagination " style=" float: right;">
+                @if (ViewBag.Sayfa > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="~/Galeri/Listele/@(ViewBag.Sayfa-1)"
+                           >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
+                        </a>
+                    </li>
+                }
+
+                @for (int i = 1; i <= sayfaSayisi; i++)
+                {
+
+
+                    <li class="page-item  @(i == ViewBag.Sayfa ? "active" : "") ">
+                        <a
+                            href="~/Galeri/Listele/@i"
+                           class="page-link">@i</a>
+                    </li>
+                }
+
+                @if (ViewBag.Sayfa < sayfaSayisi)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                            href="~/Galeri/Listele/@(ViewBag.Sayfa+1)">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
+                        </a>
+                    </li>
+
+                }
+
+
+            </ul>
+        </div>
+    </div>
+}
+else
+{
+    <strong>Haber bulunamadı</strong>
+}
+

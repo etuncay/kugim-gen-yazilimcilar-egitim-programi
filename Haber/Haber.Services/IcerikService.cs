@@ -233,7 +233,13 @@ namespace Haber.Services
                .Include(q => q.IcerikEtiketler).ThenInclude(q => q.Etiket)
                .AsQueryable();
 
-            if (filtreModel.KategoriId != null)
+            if (filtreModel.IcerikTipi!=null)
+            {
+                query = query.Where(q => q.IcerikTipi == filtreModel.IcerikTipi);
+            }
+
+
+                if (filtreModel.KategoriId != null)
             {
                 query = query.Where(q => q.KategoriId == filtreModel.KategoriId);
             }
@@ -242,6 +248,10 @@ namespace Haber.Services
             {
                 query = query.Where(q => q.Baslik.Contains(filtreModel.AraString) || q.Govde.Contains(filtreModel.AraString));
             }
+
+
+
+            result.TotalCount = query.Count();
 
             if (filtreModel.Sayfalama.Sayfalama == true)
             {

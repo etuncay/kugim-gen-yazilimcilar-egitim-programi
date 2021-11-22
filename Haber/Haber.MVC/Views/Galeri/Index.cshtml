@@ -1,1 +1,53 @@
-﻿
+﻿@model List<Haber.Models.ViewModels.Response.ResimResponseViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null && Model.Count()>0)
+{
+    var Resim = @Model[ViewBag.ResimSira-1];
+
+
+    <div class="row row-cards">
+        <div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-6" style="float: left; margin-right: 30px;">
+                <img class="d-block w-100" src="@Resim.ResimUrl">
+            </div>
+            <div class="col-md-4" style="float: left;">
+                @Html.Raw(Resim.Aciklama)
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="pagination ">
+                        <li class="page-item page-prev">
+                            @if (ViewBag.ResimSira > 1)
+                            {
+                                <a class="page-link" href="~/Galeri/@ViewBag.Id/@ViewBag.Slug/@(ViewBag.ResimSira-1)">
+                                    <div class="page-item-subtitle">Önceki</div>
+                                </a>
+                            }
+
+                        </li>
+                        @if(Model.Count > ViewBag.ResimSira)
+                {
+                    <li class="page-item page-next">
+                        <a class="page-link" href="~/Galeri/@ViewBag.Id/@ViewBag.Slug/@(ViewBag.ResimSira+1)">
+                            <div class="page-item-subtitle">Sonraki</div>
+                        </a>
+                    </li>
+                }
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

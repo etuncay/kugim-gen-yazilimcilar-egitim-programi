@@ -31,5 +31,24 @@ namespace Haber.MVC.Controllers
 
             return View(haberResult.Data);
         }
+
+        [HttpGet("kategori/{kategoriId}/{sayfa}")]
+        public async Task<IActionResult> Kategori(int kategoriId,  int sayfa)
+        {
+            
+            var al = 6;
+            var atla = (sayfa * al)-al;
+
+            var haberRequest = new RestRequest($"Icerik/Filtrele?Sayfalama.Al={al}&Sayfalama.Atla={atla}&Sayfalama.Sayfalama=true&KategoriId={kategoriId}");
+
+            var haberResult = await _restClient.GetAsync<ResponseResultModel<List<IcerikResponseViewModel>>>(haberRequest);
+
+            ViewBag.Sayfa = sayfa;
+            ViewBag.KategoriId = kategoriId;
+
+            return View(haberResult);
+        }
+
+
     }
 }

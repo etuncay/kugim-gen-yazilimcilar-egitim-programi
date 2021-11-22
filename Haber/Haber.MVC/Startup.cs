@@ -28,6 +28,11 @@ namespace Haber.MVC
         {
             services.AddControllersWithViews();
 
+#if DEBUG
+            IMvcBuilder builder = services.AddRazorPages();
+            builder.AddRazorRuntimeCompilation();
+#endif
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
