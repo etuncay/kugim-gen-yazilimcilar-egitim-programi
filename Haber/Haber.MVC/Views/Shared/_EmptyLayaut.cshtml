@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>>@ViewData["Title"] - Haber Sitesi</title>
+    <!-- CSS files -->
+    <link href="~/css/tabler.min.css" rel="stylesheet" />
+    <link href="~/css/tabler-flags.min.css" rel="stylesheet" />
+    <link href="~/css/tabler-payments.min.css" rel="stylesheet" />
+    <link href="~/css/tabler-vendors.min.css" rel="stylesheet" />
+    <link href="~/css/demo.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="page page-center">
+        <div class="container-tight py-4">
+           @RenderBody()
+        </div>
+    </div>
+
+</body>
+</html>

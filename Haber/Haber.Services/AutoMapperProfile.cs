@@ -73,6 +73,14 @@ namespace Haber.Services
             CreateMap<ResimRequestViewModel, ResimEntity>().ReverseMap();
             CreateMap<ResimEntity, ResimResponseViewModel>().ReverseMap();
 
+            CreateMap<YorumRequestViewModel, YorumEntity>().ReverseMap();
+            CreateMap<YorumEntity, YorumResponseViewModel>()
+                .ForMember(q=>q.Kullanici, opt => opt.MapFrom(src => new LabelValueModel() {
+                    Label = src.Kullanici.KullaniciAdi,
+                    Value = src.KullaniciId
+                }))
+                .ReverseMap();
+
 
 
         }

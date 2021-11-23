@@ -1,4 +1,5 @@
 ﻿using Haber.Models.ViewModels;
+using Haber.Models.ViewModels.Request;
 using Haber.Models.ViewModels.Response;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
@@ -49,6 +50,31 @@ namespace Haber.MVC.Controllers
             return View(haberResult);
         }
 
+
+        [HttpPost("YorumEkle")]
+        public async Task<IActionResult> YorumEkle(int icerikId,string slug, string govde)
+        {
+
+            var model = new YorumRequestViewModel()
+            {
+                IcerikId =icerikId,
+                KullaniciId = 4,
+                Govde = govde,
+                Aktif = false
+            };
+
+            var request = new RestRequest("Yorum/Ekle").AddJsonBody(model);
+
+            var response = await _restClient.PostAsync<ResponseResultModel<TokenResponseResultViewModel>>(request);
+
+
+            if (response != null && response.Type == Haber.Models.Enums.EnumResponseResultType.Success)
+            { 
+                
+            }
+
+            return RedirectToAction("Index", new { id = icerikId, slug });
+        }
 
     }
 }
