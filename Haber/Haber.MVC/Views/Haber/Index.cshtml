@@ -12,22 +12,25 @@
         <img class="d-block w-100" alt="@Model.Baslik" src="@Model.ResimUrl">
         <hr />
         <div class="row">
-            <div class="col-md-6">Kategori : <strong>
-                <a asp-controller="Haber"
-                   asp-action="Kategori",
-                   asp-route-kategoriId="@Model.Kategori.Value"
-                   asp-route-sayfa="1"
-                   >
-                    @Model.Kategori.Label
-                </a>
-                   </strong></div>
-            <div  class="col-md-6"><span style="float:right">Tarih Saat: <strong >@Model.Tarih</strong></span></div>
+            <div class="col-md-6">
+                Kategori : <strong>
+                    <a asp-controller="Haber"
+                       asp-action="Kategori" ,
+                       asp-route-kategoriId="@Model.Kategori.Value"
+                       asp-route-sayfa="1">
+                        @Model.Kategori.Label
+                    </a>
+                </strong>
+            </div>
+            <div class="col-md-6"><span style="float:right">Tarih Saat: <strong>@Model.Tarih</strong></span></div>
         </div>
         <br />
         <span>
             @Html.Raw(Model.Govde)
         </span>
         @(await Component.InvokeAsync("HaberFotograflar", new { icerikId=Model.Id}))
+        <hr />
+        @(await Component.InvokeAsync("Yorumlar", new { icerikId=Model.Id, slug = Model.Slug }))
 
     </div>
     <div class="col-md-3">

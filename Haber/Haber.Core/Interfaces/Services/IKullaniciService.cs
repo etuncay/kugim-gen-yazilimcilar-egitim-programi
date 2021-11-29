@@ -13,6 +13,7 @@ namespace Haber.Core.Interfaces.Services
     {
         ResponseResultModel<List<KullaniciResponseViewModel>> Listele();
         ResponseResultModel<KullaniciResponseViewModel> Getir(int id);
+        ResponseResultModel<KullaniciResponseViewModel> Getir(string userName);
         ResponseResultModel<int> Ekle(KullaniciRequestViewModel model);
         ResponseResultModel Guncelle(int id, KullaniciRequestViewModel model);
         ResponseResultModel Sil(int id);

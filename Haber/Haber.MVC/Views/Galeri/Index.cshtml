@@ -34,18 +34,20 @@
                             }
 
                         </li>
-                        @if(Model.Count > ViewBag.ResimSira)
-                {
-                    <li class="page-item page-next">
-                        <a class="page-link" href="~/Galeri/@ViewBag.Id/@ViewBag.Slug/@(ViewBag.ResimSira+1)">
-                            <div class="page-item-subtitle">Sonraki</div>
-                        </a>
-                    </li>
-                }
-                        
+                        @if (Model.Count > ViewBag.ResimSira)
+                        {
+                            <li class="page-item page-next">
+                                <a class="page-link" href="~/Galeri/@ViewBag.Id/@ViewBag.Slug/@(ViewBag.ResimSira+1)">
+                                    <div class="page-item-subtitle">Sonraki</div>
+                                </a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
+            <!--<hr />-->
+            @*@(await Component.InvokeAsync("Yorumlar", new { icerikId= ViewBag.Id, slug = ViewBag.Slug }))*@
         </div>
     </div>
 

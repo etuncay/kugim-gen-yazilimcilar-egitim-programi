@@ -9,6 +9,7 @@ namespace Haber.Models.ViewModels.Request
     public class YorumRequestViewModel
     {
         public int IcerikId { get; set; }
+        public string KullaniciAdi { get; set; }
         public int KullaniciId { get; set; }
         public string Govde { get; set; }
         public bool Aktif { get; set; } = false;

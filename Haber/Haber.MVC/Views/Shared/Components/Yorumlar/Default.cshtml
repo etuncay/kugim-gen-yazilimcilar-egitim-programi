@@ -1,0 +1,59 @@
+﻿@model List<Haber.Models.ViewModels.Response.YorumResponseViewModel>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var _authHelper = new Haber.MVC.AuthHelper(HttpContextAccessor);
+
+}
+<div class="row row-cards">
+    <div class="card">
+        <div class="card-header">
+            Yorum Form
+        </div>
+        <div class="card-body">
+            @if (_authHelper.IsAuth())
+            {
+                <form method="post" action="~/Haber/YorumEkle">
+                    <input type="hidden" name="icerikId" value="@ViewBag.IcerikId" />
+                    <input type="hidden" name="slug" value="@ViewBag.Slug" />
+                    <textarea name="govde" class="form-control"></textarea>
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <span>Lütfen Giriş Yapınız</span>
+            }
+
+        </div>
+    </div>
+
+    <div class="card mb-12">
+        <div class="card-header">
+            <h3 class="card-title">Yorumlar</h3>
+        </div>
+        <div class="list-group list-group-flush list-group-hoverable">
+            @if (Model != null)
+            {
+                @foreach (var yorum in Model)
+                {
+                    <div class="list-group-item">
+                        <div class="row align-items-center">
+
+                            <div class="col ">
+                                <a href="#" class="text-body d-block">@yorum.Kullanici.Label</a>
+                                <small class="d-block text-muted  mt-n1">
+                                    @yorum.Govde
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>

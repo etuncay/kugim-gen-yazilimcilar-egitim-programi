@@ -1,6 +1,7 @@
 ﻿using Haber.Models.ViewModels;
 using Haber.Models.ViewModels.Request;
 using Haber.Models.ViewModels.Response;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
@@ -14,9 +15,10 @@ namespace Haber.MVC.Controllers
     public class HaberController : Controller
     {
         private readonly RestClient _restClient;
-
-        public HaberController()
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HaberController(IHttpContextAccessor httpContextAccessor)
         {
+            _httpContextAccessor = httpContextAccessor;
             _restClient = new RestClient("http://localhost:42939/api/");
         }
 
@@ -54,18 +56,19 @@ namespace Haber.MVC.Controllers
         [HttpPost("YorumEkle")]
         public async Task<IActionResult> YorumEkle(int icerikId,string slug, string govde)
         {
+            var _authHelper = new AuthHelper(_httpContextAccessor);
 
             var model = new YorumRequestViewModel()
             {
                 IcerikId =icerikId,
-                KullaniciId = 4,
+                KullaniciAdi = _authHelper.GetUserName(),
                 Govde = govde,
                 Aktif = false
             };
 
             var request = new RestRequest("Yorum/Ekle").AddJsonBody(model);
 
-            var response = await _restClient.PostAsync<ResponseResultModel<TokenResponseResultViewModel>>(request);
+            var response = await _restClient.PostAsync<ResponseResultModel<int>>(request);
 
 
             if (response != null && response.Type == Haber.Models.Enums.EnumResponseResultType.Success)

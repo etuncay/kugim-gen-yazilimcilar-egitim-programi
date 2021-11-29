@@ -18,14 +18,15 @@ namespace Haber.MVC.ViewComponents
             _restClient = new RestClient("http://localhost:42939/api/");
         }
 
-
-        public async Task<IViewComponentResult> InvokeAsync(int icerikId)
+        public async Task<IViewComponentResult> InvokeAsync(int icerikId, string slug)
         {
 
             var request = new RestRequest($"Yorum/Listele?icerikId={icerikId}");
             var response = await _restClient.GetAsync<ResponseResultModel<List<YorumResponseViewModel>>>(request);
 
             var result = response.Data;
+            ViewBag.IcerikId = icerikId;
+            ViewBag.Slug = slug;
 
             return View(result);
         }

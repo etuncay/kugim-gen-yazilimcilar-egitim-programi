@@ -17,10 +17,10 @@ namespace Haber.Models.ViewModels
 
     public class ResponseResultModel
     {
-        public Dictionary<string, string> Messages { get; set; } = new Dictionary<string, string>();
+        //public Dictionary<string, string> Messages { get; set; } = new Dictionary<string, string>();
         public string Message { get; set; } 
         public EnumResponseResultType Type { get; set; }
-        public string Error { get; set; }
+        //public string Error { get; set; }
 
         public void SetErrors(ValidationResult validate)
         {
@@ -28,7 +28,7 @@ namespace Haber.Models.ViewModels
 
             foreach (var error in validate.Errors)
             {
-                Messages.Add(error.PropertyName, error.ErrorMessage);
+                //Messages.Add(error.PropertyName, error.ErrorMessage);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Haber.Models.ViewModels
         public static string KayitBulundu => "Kayıt bulundu.";
         public static string KayitBulunamadi => "Kayıt bulunamadı";
         public static string KadedilirkenHata => "Kayıt yapılırken hata çıkmıştır.";
-        public static string BasariliIslem=> "Kayıt yapılırken hata çıkmıştır.";
+        public static string BasariliIslem=> "Kayıt başarılı bir şekilde yapılmıştır.";
         public static string BasarisizIslem => "Kayıt yapılırken hata çıkmıştır.";
 
     }

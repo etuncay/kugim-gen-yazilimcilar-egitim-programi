@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Haber.WebApi
 {
@@ -51,6 +50,7 @@ namespace Haber.WebApi
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IResimService, ResimService>();
+            services.AddScoped<IYorumService, YorumService>();
 
 
             services.AddCors(o => o.AddPolicy(ApiCorsPolicy, builder =>

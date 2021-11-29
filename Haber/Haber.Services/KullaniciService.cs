@@ -221,5 +221,28 @@ namespace Haber.Services
 
             return result;
         }
+
+        public ResponseResultModel<KullaniciResponseViewModel> Getir(string userName)
+        {
+            var result = new ResponseResultModel<KullaniciResponseViewModel>();
+
+            var query = _haberDbContext.Kullanici.Include(q => q.KullaniciYetki).Where(q => q.KullaniciAdi == userName).FirstOrDefault();
+
+            if (query != null)
+            {
+                result.Data = _mapper.Map<KullaniciResponseViewModel>(query);
+
+                result.Type = Models.Enums.EnumResponseResultType.Success;
+                result.Message = "Kullanıcı Bulundu.";
+            }
+            else
+            {
+                result.Type = Models.Enums.EnumResponseResultType.Error;
+                result.Message = "Kullanıcı Bulunamadı";
+            }
+
+
+            return result;
+        }
     }
 }

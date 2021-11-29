@@ -3,6 +3,7 @@ using Haber.Models.ViewModels.Request;
 using Haber.Models.ViewModels.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -32,16 +33,15 @@ namespace Haber.MVC.Controllers
         public async Task<IActionResult> SignIn(KullaniciGirisRequestViewModel model)
         {
             var request = new RestRequest("Auth/SignIn").AddJsonBody(model);
-                
 
+            var user = HttpContext.Session.GetString("User");
 
             var response = await _restClient.PostAsync<ResponseResultModel<TokenResponseResultViewModel>>(request);
            
             if (response!=null && response.Type == Haber.Models.Enums.EnumResponseResultType.Success)
             {
                 HttpContext.Session.SetString("Token", response.Data.Token);
-
-                var getS = HttpContext.Session.GetString("Token");
+                HttpContext.Session.SetString("User", model.KullaniciAdi);
 
                 return RedirectToAction("Index", "Home");
             }

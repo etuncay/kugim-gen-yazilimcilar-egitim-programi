@@ -17,10 +17,11 @@ namespace Haber.Services
     {
         private readonly HaberDbContext _haberDbContext;
         private readonly IMapper _mapper;
-
-        public YorumService(HaberDbContext haberDbContext, IMapper mapper)
+        private readonly IKullaniciService _kullaniciService;
+        public YorumService(HaberDbContext haberDbContext, IKullaniciService kullaniciService, IMapper mapper)
         {
             _haberDbContext = haberDbContext;
+            _kullaniciService = kullaniciService;
             _mapper = mapper;
         }
 
@@ -30,9 +31,13 @@ namespace Haber.Services
             var result = new ResponseResultModel<int>();
             if (query != null)
             {
+                var user = _kullaniciService.Getir(model.KullaniciAdi);
+
+                model.KullaniciId = user.Data.Id;
+
                 var entity = _mapper.Map<YorumEntity>(model);
 
-                _haberDbContext.Add(entity);
+                _haberDbContext.Yorum.Add(entity);
 
                 if (_haberDbContext.SaveChanges() > 0)
                 {
@@ -59,7 +64,9 @@ namespace Haber.Services
 
         public ResponseResultModel<List<YorumResponseViewModel>> Listele(int icerikId)
         {
-            var query = _haberDbContext.Yorum.Include(q=>q.Kullanici).Where(q => q.IcerikId == icerikId).ToList();
+            var query = _haberDbContext.Yorum
+                .Include(q=>q.Kullanici).Where(q => q.IcerikId == icerikId)
+                .OrderByDescending(q=>q.OlusturulmaTarihi).ToList();
             var result = new ResponseResultModel<List<YorumResponseViewModel>>();
 
             if (query.Any())

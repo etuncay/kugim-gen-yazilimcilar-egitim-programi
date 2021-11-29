@@ -1,4 +1,11 @@
-﻿<header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var _authHelper = new Haber.MVC.AuthHelper(HttpContextAccessor);
+
+}
+<header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
     <div class="container-xl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
             <span class="navbar-toggler-icon"></span>
@@ -11,7 +18,7 @@
         <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item d-none d-md-flex me-3">
                 <div class="btn-list">
-                    @if (!User.Identity.IsAuthenticated)
+                    @if (!_authHelper.IsAuth())
                     {
                         <a href="~/Auth/SignIn" class="btn btn-outline-white" rel="noreferrer">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M20 12h-13l3 -3m0 6l-3 -3" /></svg>
@@ -34,24 +41,15 @@
 
                 </div>
             </div>
-            @if (User.Identity.IsAuthenticated)
+            @if (_authHelper.IsAuth())
             {
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                         <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
                         <div class="d-none d-xl-block ps-2">
-                            <div>Paweł Kuna</div>
-                            <div class="mt-1 small text-muted">UI Designer</div>
+                            <div>@_authHelper.GetUserName()</div>
                         </div>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="#" class="dropdown-item">Set status</a>
-                        <a href="#" class="dropdown-item">Profile & account</a>
-                        <a href="#" class="dropdown-item">Feedback</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">Settings</a>
-                        <a href="#" class="dropdown-item">Logout</a>
-                    </div>
                 </div>
             }
 
